@@ -1,0 +1,30 @@
+# This file specifies files and directories that should be ignored by Docker when building an image.
+# It will be combined with any .gitignore files in parent directories.
+# See https://docs.docker.com/engine/reference/builder/#dockerignore-file for more details.
+
+# Common
+README.md
+CHANGELOG.md
+docker-compose.yml
+Dockerfile
+
+# git
+.git
+.gitattributes
+.gitignore
+
+
+# JetBrains
+.idea
+
+# Node
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+
+# dotnet
+**/obj
+**/bin
