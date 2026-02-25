@@ -74,3 +74,26 @@ Create a Dockerfile for the app and test it!
 
 1. Follow Microsoft's guide on containerizing dotnet apps
 2. See https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows&pivots=dotnet-10-0
+
+## Best practices
+
+- Minimize layers by combining related commands.
+- Split Dockerfile into build and runtime stages! (massively reduces image size)
+- Use .dockerignore to reduce the build-context and image size.
+- Pin versions! Use `FROM alpine:3.19.0` rather than just `alpine` or `alpine:latest`.
+  - Use of `:stable` tags might be a good idea if available.
+- Add metadata to your container images!
+    ```
+    LABEL org.opencontainers.image.source="https://github.com/org/repo"
+    LABEL org.opencontainers.image.version="1.0.0"
+    LABEL org.opencontainers.image.description="My custom base image"
+    ```
+
+
+## Bonus assignments
+
+1. Use `docker compose up -d` to build and launch all our containers (in the same virtual network).
+2. Try executing into on of the running containers (`docker compose exec -it <service-name> /bin/bash`).
+3. Try to fetch our HTML website from `static-web-app` via the `ubuntu-debugger` container.
+4. Try fetching logs from our `static-web-app` via cmd `docker compose logs -f <service-name>`, can you see the fetch?
+5. Try reducing some of the container image sizes! Check with `docker images`.
