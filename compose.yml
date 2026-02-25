@@ -4,6 +4,7 @@ services:
     image: workshop/ubuntu-debugger # The name of the image to be built, in the format <repository>/<image-name>:<tag>
 
   static-web-app:
+    hostname: static-web-app
     build:
       context: ./static-web-app
       dockerfile: Dockerfile # Replace with Dockerfile-smaller if you want to use the smaller image

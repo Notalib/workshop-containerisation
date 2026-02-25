@@ -16,9 +16,9 @@ COPY *.go ./
 # Build go native executable
 RUN CGO_ENABLED=0 GOOS=linux go build -o /output
 
-#################
+###################
 ## Runtime stage ##
-#################
+###################
 
 FROM scratch AS runner
 

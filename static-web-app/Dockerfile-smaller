@@ -3,7 +3,7 @@ FROM gcr.io/distroless/python3-debian12
 
 WORKDIR /app
 
-COPY html /app
+COPY html/* /app
 
 EXPOSE 80
 
