@@ -7,6 +7,12 @@ Create Dockerfiles for these applications
 - Install Docker Desktop or Rancher Desktop (OSS)
 - Make sure `docker -v` works from your terminal.
 
+## Docs
+
+Have these documentation sites in hand when doing the assignments:
+- https://docs.docker.com/get-started/docker-overview/
+- https://docs.docker.com/reference/dockerfile/
+
 ## Assignment
 
 1. Create a `Dockerfile` for each app, starting with the lang/tech you feel most comfortable with.
