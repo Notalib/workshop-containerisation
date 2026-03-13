@@ -12,6 +12,9 @@ Create Dockerfiles for these applications
 Have these documentation sites in hand when doing the assignments:
 - https://docs.docker.com/get-started/docker-overview/
 - https://docs.docker.com/reference/dockerfile/
+- https://docs.docker.com/guides/java/containerize/
+- https://docs.docker.com/guides/dotnet/containerize/
+- https://docs.docker.com/guides/golang/build-images/
 
 ## Assignment
 
