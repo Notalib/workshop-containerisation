@@ -68,10 +68,13 @@ Simple scratch-based go app that just outputs the contents of a .txt file
 
 ### java-hello-world
 
-Simple hello-world app in Java
+Simple hello-world app in Java.
 
 #### TASK
-1. Follow Ole's guide on containerizing a Java app
+1. Containerize this little Java hello-world app, start with just the Hello.java file
+2. Run the container image and change who it says hello to.
+3. Make the container print the contents of a local file by volume mapping it into the container.
+4. Now modify the Dockerfile to build the app using maven.
 
 ### dotnet-hello-world
 

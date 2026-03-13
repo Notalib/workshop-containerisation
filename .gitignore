@@ -1,2 +1,8 @@
+# Dotnet
 **/obj
 **/bin
+
+# Java
+**/*.class
+**/*.jar
+**/target
