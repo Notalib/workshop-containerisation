@@ -10,10 +10,7 @@ public class Hello {
 
         Path messageFile = Paths.get("/data/message.txt");
 
-        if (Files.exists(messageFile)) {
-            System.out.println("Extra message: " + Files.readString(messageFile));
-        } else {
-            System.out.println("No extra message file found.");
-        }
+        String msg = Files.readString(messageFile);
+        System.out.println("Extra message: " + Files.readString(messageFile));
     }
 }
