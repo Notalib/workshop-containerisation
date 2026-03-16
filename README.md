@@ -16,20 +16,26 @@ Have these documentation sites in hand when doing the assignments:
 - https://docs.docker.com/guides/dotnet/containerize/
 - https://docs.docker.com/guides/golang/build-images/
 
-## Assignment
+## Assignments
 
-1. Create a `Dockerfile` for each app, starting with the lang/tech you feel most comfortable with.
-2. Your `Dockerfile` must be split into a **build** stage and a **runner/app** stage.
-3. It must start the application when using `docker run`
+1. Containerize each app, starting with the lang/tech you feel most comfortable with. See TASKS further down in this readme.
+2. Try to first create a single-stage `Dockerfile` to build and run the app.
+  - It must automatically start the application when using `docker run <image-name>`
+3. Then split your `Dockerfile` into a **build** stage and a **runner/app** stage.
 
+### Solutions
+
+If you're completely stuck or just want to compare, solutions can be found on the `solutions` branch.
 
 ## Useful commands
 
 ### Building
-- Build: `docker build <./dir/with/dockerfile> -t <image-tag>` (assumes Dockerfile dir is also build context)
+- Build: `docker build <./context/dir> -f ./path/to/Dockerfile -t <name:tag>`
   - Serialized: `DOCKER_BUILDKIT=0 docker build ...` (debug each layer/cmd, by using printed sha as image-tag)
-- Re-tag: `docker tag <image-tag> <new-image-tag>`
-- Images & their sizes: `docker images`
+- Images & their sizes:
+  - Show local repo: `docker image ls`
+  - Inspect an image: `docker image inspect <name:tag>`
+- Re-tag: `docker tag <source-name:tag> <dest-name:tag>`
 
 ### Running
 
@@ -100,7 +106,6 @@ Create a Dockerfile for the app and test it!
     LABEL org.opencontainers.image.version="1.0.0"
     LABEL org.opencontainers.image.description="My custom base image"
     ```
-
 
 ## Bonus assignments
 
