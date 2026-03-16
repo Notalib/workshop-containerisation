@@ -23,6 +23,7 @@ RUN dotnet publish "hello-world.csproj" -c Release -o /built
 FROM mcr.microsoft.com/dotnet/runtime:10.0-alpine AS runtime
 
 LABEL org.opencontainers.image.source=https://github.com/notalib/workshop-containerisation
+LABEL org.opencontainers.image.description="Simple dotnet sample app"
 
 RUN apk upgrade --no-cache --update && \
     apk add --no-cache --update tzdata && \
@@ -50,5 +51,7 @@ ENV DOTNET_ENVIRONMENT="Development"
 USER $APP_UID
 
 WORKDIR /app
+
+# TODO: Copy in the built dotnet app from previous stage
 
 ENTRYPOINT [ "dotnet", "hello-world.dll" ]

@@ -7,6 +7,15 @@ Create Dockerfiles for these applications
 - Install Docker Desktop or Rancher Desktop (OSS)
 - Make sure `docker -v` works from your terminal.
 
+## Docs
+
+Have these documentation sites in hand when doing the assignments:
+- https://docs.docker.com/get-started/docker-overview/
+- https://docs.docker.com/reference/dockerfile/
+- https://docs.docker.com/guides/java/containerize/
+- https://docs.docker.com/guides/dotnet/containerize/
+- https://docs.docker.com/guides/golang/build-images/
+
 ## Assignment
 
 1. Create a `Dockerfile` for each app, starting with the lang/tech you feel most comfortable with.
@@ -59,10 +68,13 @@ Simple scratch-based go app that just outputs the contents of a .txt file
 
 ### java-hello-world
 
-Simple hello-world app in Java
+Simple hello-world app in Java.
 
 #### TASK
-1. Follow Ole's guide on containerizing a Java app
+1. Containerize this little Java hello-world app, start with just the Hello.java file
+2. Run the container image and change who it says hello to.
+3. Make the container print the contents of a local file by volume mapping it into the container.
+4. Now modify the Dockerfile to build the app using maven.
 
 ### dotnet-hello-world
 
