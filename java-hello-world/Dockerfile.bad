@@ -1,12 +1,12 @@
 FROM ubuntu:latest
 
 RUN apt-get update
-RUN apt-get install -y openjdk-21-jdk maven
+RUN apt-get install -y openjdk-21-jdk
 
 WORKDIR /app
 
-COPY . .
+COPY Hello.java .
 
-RUN mvn package
+RUN javac Hello.java
 
-CMD ["java", "-jar", "target/hello-1.0.jar"]
+ENTRYPOINT ["java", "Hello"]

@@ -13,6 +13,14 @@ Problems:
 - No .dockerignore
 - Not cloud-friendly
 
+### See the problem
+
+```bash
+docker build -f Dockerfile.bad -t hello:bad .
+docker build -f Dockerfile.good  -t hello:good  .
+docker image ls hello
+```
+
 ## Improvements in Dockerfile.good
 
 - Separate build and runtime stages

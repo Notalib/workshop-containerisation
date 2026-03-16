@@ -1,0 +1,12 @@
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get install -y openjdk-21-jdk maven
+
+WORKDIR /app
+
+COPY . .
+
+RUN mvn package
+
+CMD ["java", "-jar", "target/hello-pom-1.0.jar"]
