@@ -12,4 +12,4 @@ COPY message.txt /data/message.txt
 
 # TODO: Set the entrypoint to start the Hello.class
 
-ENTRYPOINT ["java", "my-built-java-class"]
+ENTRYPOINT ["java", "-jar", "my-built-java-jar"]
