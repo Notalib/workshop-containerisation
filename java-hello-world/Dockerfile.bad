@@ -6,6 +6,7 @@ RUN apt-get install -y openjdk-21-jdk
 WORKDIR /app
 
 COPY Hello.java .
+COPY message.txt /data/message.txt
 
 RUN javac Hello.java
 

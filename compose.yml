@@ -23,5 +23,7 @@ services:
       - DOTNET_ENVIRONMENT=Production
 
   java-app:
-    build: ./java-hello-world
+    build:
+      context: ./java-hello-world
+      dockerfile: Dockerfile.good
     image: workshop/java-hello-world
