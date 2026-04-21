@@ -1,4 +1,4 @@
-# TODO: FROM your-java-maven-sdk-image AS build (find an image on https://hub.docker.com)
+# TODO: FROM your-java-maven-sdk AS build (find an image on https://hub.docker.com)
 
 # TODO: copy in the source
 
@@ -6,10 +6,9 @@
 
 FROM your-java-runtime (find an image on https://hub.docker.com)
 
-# TODO: copy the built java class into the runtime stage (--from=build)
+# TODO: copy the built jar into the runtime stage (--from=build)
 
 COPY message.txt /data/message.txt
 
-# TODO: Set the entrypoint to start the Hello.class
-
+# TODO: Change the entrypoint below to start the built jar.
 ENTRYPOINT ["java", "-jar", "my-built-java-jar"]
