@@ -18,6 +18,8 @@ RUN mvn -q package -DskipTests
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
+
+# ⭐ Copy built far jar into the runtime image
 COPY --from=build /app/target/hello-pom*.jar app.jar
 
 CMD ["java", "-jar", "app.jar"]
