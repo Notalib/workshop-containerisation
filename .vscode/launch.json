@@ -1,0 +1,50 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "dockerfile",
+      "request": "launch",
+      "name": "Docker: ubuntu-debugger",
+      "dockerfile": "${workspaceFolder}/ubuntu-debugger/Dockerfile",
+      "contextPath": "${workspaceFolder}/ubuntu-debugger",
+    },
+    {
+      "type": "dockerfile",
+      "request": "launch",
+      "name": "Docker: micro-go",
+      "dockerfile": "${workspaceFolder}/micro-go-app/Dockerfile",
+      "contextPath": "${workspaceFolder}/micro-go-app",
+    },
+    {
+      "type": "dockerfile",
+      "request": "launch",
+      "name": "Docker: static-web-app",
+      "dockerfile": "${workspaceFolder}/static-web-app/Dockerfile",
+      "contextPath": "${workspaceFolder}/static-web-app",
+    },
+    {
+      "type": "dockerfile",
+      "request": "launch",
+      "name": "Docker: java-gradle",
+      "dockerfile": "${workspaceFolder}/java-hello-world-gradle/Dockerfile",
+      "contextPath": "${workspaceFolder}/java-hello-world-gradle",
+    },
+    {
+      "type": "dockerfile",
+      "request": "launch",
+      "name": "Docker: java-pom",
+      "dockerfile": "${workspaceFolder}/java-hello-world-pom/Dockerfile.good",
+      "contextPath": "${workspaceFolder}/java-hello-world-pom",
+    },
+    {
+      "type": "dockerfile",
+      "request": "launch",
+      "name": "Docker: dotnet",
+      "dockerfile": "${workspaceFolder}/dotnet-hello-world/Dockerfile",
+      "contextPath": "${workspaceFolder}/dotnet-hello-world",
+    }
+  ]
+}
