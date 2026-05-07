@@ -22,6 +22,9 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /output
 
 FROM scratch AS runner
 
+LABEL org.opencontainers.image.source=https://github.com/notalib/workshop-containerisation
+LABEL org.opencontainers.image.description="Am extremely slim Go app example"
+
 COPY --from=builder /output /go-cat
 
 COPY static.txt /

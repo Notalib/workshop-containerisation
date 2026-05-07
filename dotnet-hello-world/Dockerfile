@@ -30,7 +30,7 @@ RUN apk upgrade --no-cache --update && \
     cp -r /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime && \
     echo "Europe/Copenhagen" >  /etc/timezone
 
-# Only for the debian-based runtime
+# Only necessary for debian-based runtime (not alpine)
 # RUN apt update && \
 #     apt upgrade -y && \
 #     apt install -y locales locales-all && \

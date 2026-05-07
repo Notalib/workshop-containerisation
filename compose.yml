@@ -1,24 +1,24 @@
 services:
   ubuntu-debugger:
     build: ./ubuntu-debugger # Folder containing the Dockerfile, also known as the build context
-    image: workshop/ubuntu-debugger # The name of the image to be built, in the format <repository>/<image-name>:<tag>
+    image: ghcr.io/notalib/workshop-containerisation/ubuntu-debugger # The name of the image to be built, in the format <repository>/<image-name>:<tag>
 
   static-web-app:
     hostname: static-web-app
     build:
       context: ./static-web-app
       dockerfile: Dockerfile # Replace with Dockerfile-smaller if you want to use the smaller image
-    image: workshop/static-web-app
+    image: ghcr.io/notalib/workshop-containerisation/static-web-app
     ports:
       - "127.0.0.1:8080:80"
 
   micro-go-app:
     build: ./micro-go-app
-    image: workshop/micro-go-app
+    image: ghcr.io/notalib/workshop-containerisation/micro-go-app
 
   dotnet-app:
     build: ./dotnet-hello-world
-    image: workshop/dotnet-hello-world
+    image: ghcr.io/notalib/workshop-containerisation/dotnet-hello-world
     environment:
       - DOTNET_ENVIRONMENT=Production
 
@@ -26,4 +26,4 @@ services:
     build:
       context: ./java-hello-world
       dockerfile: Dockerfile.good
-    image: workshop/java-hello-world
+    image: ghcr.io/notalib/workshop-containerisation/java-hello-world

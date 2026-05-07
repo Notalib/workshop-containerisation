@@ -46,6 +46,9 @@ RUN --mount=type=cache,target=/cache/.gradle \
 ###############################
 FROM eclipse-temurin:21-jre AS runtime
 
+LABEL org.opencontainers.image.source=https://github.com/notalib/workshop-containerisation
+LABEL org.opencontainers.image.description="Java hello-world example app built with gradle"
+
 RUN groupadd -g 1001 app-group && \
     useradd -u 1001 -g app-group -m -d /app -s /bin/false app-user
 

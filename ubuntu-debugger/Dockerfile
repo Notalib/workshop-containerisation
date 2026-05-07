@@ -1,5 +1,8 @@
 FROM ubuntu:24.04
 
+LABEL org.opencontainers.image.source=https://github.com/notalib/workshop-containerisation
+LABEL org.opencontainers.image.description="Ubuntu-based debugger image"
+
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y jq yq \

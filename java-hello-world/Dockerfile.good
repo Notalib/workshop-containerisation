@@ -1,13 +1,23 @@
 # Build stage
 FROM eclipse-temurin:21-jdk AS build
+
 WORKDIR /src
+
 COPY Hello.java .
+
 RUN javac Hello.java
 
 # Runtime stage
 FROM eclipse-temurin:21-jre
+
+LABEL org.opencontainers.image.source=https://github.com/notalib/workshop-containerisation
+LABEL org.opencontainers.image.description="Java hello-world example app"
+
 WORKDIR /app
+
 COPY --from=build /src/Hello.class .
 COPY message.txt /data/message.txt
+
 ENV NAME=World
+
 ENTRYPOINT ["java", "Hello"]
