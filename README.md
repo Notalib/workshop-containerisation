@@ -5,7 +5,7 @@ Create Dockerfiles for these applications
 ## Pre-requisites
 
 - Install Docker Desktop or Rancher Desktop (OSS)
-- Make sure `docker -v` works from your terminal.
+- Make sure `docker --version` works from your terminal.
 
 ## Docs
 
@@ -30,7 +30,7 @@ If you're completely stuck or just want to compare, solutions can be found on th
 ## Useful commands
 
 ### Building
-- Build: `docker build <./context/dir> -f ./path/to/Dockerfile -t <name:tag>`
+- Build: `docker build <./context/dir> --file ./path/to/Dockerfile --tag <name:tag>`
   - Serialized: `DOCKER_BUILDKIT=0 docker build ...` (debug each layer/cmd, by using printed sha as image-tag)
 - Images & their sizes:
   - Show local repo: `docker image ls`
@@ -42,7 +42,7 @@ If you're completely stuck or just want to compare, solutions can be found on th
 - What's running? `docker ps`
 - Run: `docker run <image-tag>` (runs interactively until done or ctrl+c)
 - Keep running: `docker run --detached <image-tag>` (runs in background until done)
-- Debug: `docker run -it --entrypoint /bin/bash <image-tag>`
+- Debug: `docker run --interactive --tty --entrypoint /bin/bash <image-tag>`
 
 ### 1. ubuntu-debugger
 
@@ -115,8 +115,8 @@ Create a Dockerfile for the app and test it!
 
 ## Bonus assignments
 
-1. Use `docker compose up -d` to build and launch all our containers (in the same virtual network).
+1. Use `docker compose up --detach` to build and launch all our containers (in the same virtual network).
 2. Try executing into on of the running containers (`docker compose exec -it <service-name> /bin/bash`).
 3. Try to fetch our HTML website from `static-web-app` via the `ubuntu-debugger` container.
-4. Try fetching logs from our `static-web-app` via cmd `docker compose logs -f <service-name>`, can you see the fetch?
+4. Try fetching logs from our `static-web-app` via cmd `docker compose logs --follow <service-name>`, can you see the fetch?
 5. Try reducing some of the container image sizes! Check with `docker images`.
