@@ -178,49 +178,11 @@ http://localhost:8081
 
 # 6. Docker Compose Example
 
-See [compose.yml](./compose.yml)
+## Official Spring Boot + Postgres Sample (modified)
 
-Run the entire stack:
+This is a modified version of spring-postgres example from [compose-awesome.](https://github.com/docker/awesome-compose).
 
-```bash
-docker compose up -d
-```
-
-Stop the stack:
-
-```bash
-docker compose down
-```
-
-## Observations
-
-- Entire system stack defined as code
-- One command deployment
-- Automatic networking
-- Portable infrastructure
-
----
-
-# 7. Spring Boot + PostgreSQL
-
-## Official Docker Spring + Postgres Sample
-
-Clone and run:
-```bash
-git clone https://github.com/docker/awesome-compose
-cd awesome-compose/spring-postgres
-docker compose up -d
-```
-
-Open in browser:
-```text
-http://localhost:8080
-```
-
-Then hit the endpoint:
-```bash
-curl localhost:8080
-```
+Entire system/stack is defined in: [compose.yml](./compose.yml)
 
 This sample is specifically built around:
 - Spring Boot
@@ -229,16 +191,38 @@ This sample is specifically built around:
 - Container networking
 - Persistence wiring (data survives re-start & re-create)
 
+## Additions
+- Added /new form to add greeting
+- Added /greetings endpoint to show all greetings.
+
+
+## Commands
+Start the entire stack:
+```bash
+docker compose up --detach --build
+```
+
+Stop the stack:
+```bash
+docker compose down [--volumes]
+```
+
+## Questions
+- What happened to the data? Did your greetings survive?
+
 ## Observations
 
-- Same patterns as WordPress
+- Entire system stack defined as code
+- One command deployment
 - Application + infrastructure integration
 - Environment-driven configuration
 - No local JDK or database required
+- Automatic networking
+- Portable infrastructure
 
 ---
 
-# 8. Cleanup
+# 7. Cleanup
 
 Remove containers:
 
@@ -252,10 +236,15 @@ Remove networks:
 docker network rm wp-net spring-net
 ```
 
-Remove compose stack:
+Remove compose stack (and data volumes):
 
 ```bash
 docker compose down -v
+```
+
+General cleanup of all Docker resources
+```bash
+docker system prune
 ```
 
 ## Observations
@@ -266,7 +255,7 @@ docker compose down -v
 
 ---
 
-# 9. Key Takeaways
+# 8. Key Takeaways
 
 - Containers package the entire runtime environment
 - Same image runs everywhere
