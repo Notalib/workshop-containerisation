@@ -2,7 +2,9 @@
 ## Build stage ##
 #################
 
-FROM golang:1.26 AS builder
+FROM --platform=$BUILDPLATFORM golang:1.26 AS builder
+ARG TARGETOS
+ARG TARGETARCH
 
 WORKDIR /src
 
@@ -14,7 +16,7 @@ RUN go mod download
 COPY *.go ./
 
 # Build go native executable
-RUN CGO_ENABLED=0 GOOS=linux go build -o /output
+RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=0 GOOS=linux go build -o /output
 
 ###################
 ## Runtime stage ##
