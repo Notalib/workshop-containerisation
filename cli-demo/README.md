@@ -177,13 +177,11 @@ http://localhost:8081
 
 ## BONUS: Can we persist our infrastructure commands?
 
-These Docker commands setup our infrastructure consistently, but wouldn't it be nice if we could persist these as a configuration file?
+These Docker commands setup our infrastructure consistently, but wouldn't it be nice if we could persist these as a configuration file? This is where **Docker Compose** comes in!
 
-This is where Docker Compose comes in!
+The commands above have been persisted as [compose.yml](./compose.yml), and can all be brought up with a simple `docker compose up --detach` command.
 
-The commands to setup Network + Wordpress + DB above have been persisted as [compose.yml](./compose.yml)
-
-This is called :star2: "Infrastructure as Code" :star2:
+This is called :star2: Infrastructure as Code :star2:
 
 ---
 
