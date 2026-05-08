@@ -9,7 +9,7 @@ A quick live-demo walkthrough showing the power of containers using Docker CLI a
 Start an NGINX web server in seconds:
 
 ```bash
-docker run -d -p 8080:80 --name web nginx
+docker run --detach --publish 8080:80 --name web nginx
 ```
 
 Open in browser:
@@ -42,7 +42,7 @@ docker run -d \
 Connect to it:
 
 ```bash
-docker exec -it db psql -U postgres
+docker exec --interactive --tty db psql -U postgres
 ```
 
 Inside `psql`:
@@ -73,6 +73,7 @@ Run a temporary Node.js environment:
 ```bash
 docker run --rm -it node node
 ```
+:information_source: -it is short for --interactive --tty
 
 Inside Node REPL:
 
@@ -121,7 +122,7 @@ docker run --rm openjdk:21 java -version
 # 5. Spring Boot app in one command
 
 ```bash
-docker run -p 8080:8080 springio/gs-spring-boot-docker
+docker run --publish 8080:8080 springio/gs-spring-boot-docker
 ```
 
 ---
@@ -174,6 +175,16 @@ http://localhost:8081
 - Environment-based configuration
 - No manual database wiring
 
+## BONUS: Can we persist our infrastructure commands?
+
+These Docker commands setup our infrastructure consistently, but wouldn't it be nice if we could persist these as a configuration file?
+
+This is where Docker Compose comes in!
+
+The commands to setup Network + Wordpress + DB above have been persisted as [compose.yml](./compose.yml)
+
+This is called :star2: "Infrastructure as Code" :star2:
+
 ---
 
 # 6. Docker Compose Example
@@ -182,29 +193,33 @@ http://localhost:8081
 
 This is a modified version of spring-postgres example from [compose-awesome.](https://github.com/docker/awesome-compose).
 
-Entire system/stack is defined in: [compose.yml](./compose.yml)
+Entire system/stack is defined in: [spring-postgres/compose.yml](./spring-postgres/compose.yaml)
 
 This sample is specifically built around:
 - Spring Boot
 - PostgreSQL
 - Docker Compose
 - Container networking
-- Persistence wiring (data survives re-start & re-create)
+- Persistence wiring (data survives container deletion)
 
-## Additions
+## Additions by ddfreiling
 - Added /new form to add greeting
 - Added /greetings endpoint to show all greetings.
 
-
 ## Commands
-Start the entire stack:
+:magic_wand: Start the entire stack
 ```bash
 docker compose up --detach --build
 ```
 
-Stop the stack:
+:stop_sign: Stop the stack
 ```bash
-docker compose down [--volumes]
+docker compose stop
+```
+
+:boom: Delete it *all*
+```bash
+docker compose down --volumes
 ```
 
 ## Questions
@@ -227,7 +242,7 @@ docker compose down [--volumes]
 Remove containers:
 
 ```bash
-docker rm -f web db wp wp-db spring-app spring-db
+docker rm --force web db wp wp-db spring-app spring-db
 ```
 
 Remove networks:
@@ -239,10 +254,10 @@ docker network rm wp-net spring-net
 Remove compose stack (and data volumes):
 
 ```bash
-docker compose down -v
+docker compose down --volumes
 ```
 
-General cleanup of all Docker resources
+General cleanup of all unused Docker resources
 ```bash
 docker system prune
 ```
