@@ -4,7 +4,8 @@ Create Dockerfiles for these applications
 
 ## Pre-requisites
 
-- Install Docker Desktop or Rancher Desktop (OSS)
+- Install **Rancher Desktop (Recommended!)**
+  - If already using Docker Desktop or Podman, follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup).
 - Make sure `docker --version` works from your terminal.
 
 ## Docs
@@ -26,6 +27,10 @@ Have these documentation sites in hand when doing the assignments:
 ### Solutions
 
 If you're completely stuck or just want to compare, solutions can be found on the `solutions` branch.
+
+```bash
+git checkout -t origin/solutions
+```
 
 ## Useful commands
 
@@ -71,6 +76,7 @@ Simple scratch-based go app that just outputs the contents of a .txt file
 
 1. This task is purely educational. Inspect the Dockerfile and learn about `scratch`
 2. Build the container image and check its disk-size! `docker images | grep <image-tag>`
+3. (Bonus) Inject another file into the container for it to print out.
 
 ### java-hello-world
 
@@ -110,7 +116,7 @@ Create a Dockerfile for the app and test it!
     ```
     LABEL org.opencontainers.image.source="https://github.com/org/repo"
     LABEL org.opencontainers.image.version="1.0.0"
-    LABEL org.opencontainers.image.description="My custom base image"
+    LABEL org.opencontainers.image.description="My awesome app image"
     ```
 
 ## Bonus assignments
@@ -118,5 +124,5 @@ Create a Dockerfile for the app and test it!
 1. Use `docker compose up --detach` to build and launch all our containers (in the same virtual network).
 2. Try executing into on of the running containers (`docker compose exec -it <service-name> /bin/bash`).
 3. Try to fetch our HTML website from `static-web-app` via the `ubuntu-debugger` container.
-4. Try fetching logs from our `static-web-app` via cmd `docker compose logs --follow <service-name>`, can you see the fetch?
+4. Try fetching logs from our `static-web-app` via cmd `docker compose logs --follow <service-name>`, can you see when it was fetched?
 5. Try reducing some of the container image sizes! Check with `docker images`.
