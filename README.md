@@ -5,6 +5,7 @@ Create Dockerfiles for these applications
 ## Pre-requisites
 
 - Install **Rancher Desktop (Recommended!)**
+  - Make sure `~/.rd/bin` is on your PATH!
   - If already using Docker Desktop or Podman, follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup).
 - Make sure `docker --version` works from your terminal.
 
