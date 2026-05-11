@@ -4,7 +4,9 @@ Create Dockerfiles for these applications
 
 ## Pre-requisites
 
-- Install Docker Desktop or Rancher Desktop (OSS)
+- Install **Rancher Desktop (Recommended!)**
+  - Make sure `~/.rd/bin` is on your PATH!
+  - If already using Docker Desktop or Podman, follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup).
 - Make sure `docker --version` works from your terminal.
 
 ## Docs
@@ -32,6 +34,10 @@ It also contains a Spring Boot + DB example at [cli-demo/spring-postgres](./cli-
 
 If you're completely stuck or just want to compare, solutions can be found on the `solutions` branch.
 
+```bash
+git checkout -t origin/solutions
+```
+
 ## Useful commands
 
 ### Building
@@ -56,7 +62,7 @@ Useful to understand base-images and layering
 
 #### TASK
 
-1. Start with `FROM ubuntu24.04` and then make sure curl and dnsutils are installed in the container image.
+1. Start with `FROM ubuntu:24.04` and then make sure curl and dnsutils are installed in the container image.
 2. Start and execute into the container image, then try using the `curl` and `nslookup` tools.
 
 ### 2. static-web-app
@@ -76,6 +82,7 @@ Simple scratch-based go app that just outputs the contents of a .txt file
 
 1. This task is purely educational. Inspect the Dockerfile and learn about `scratch`
 2. Build the container image and check its disk-size! `docker images | grep <image-tag>`
+3. (Bonus) Inject another file into the container for it to print out.
 
 ### 4. java-hello-world
 
@@ -115,7 +122,7 @@ Create a Dockerfile for the app and test it!
     ```
     LABEL org.opencontainers.image.source="https://github.com/org/repo"
     LABEL org.opencontainers.image.version="1.0.0"
-    LABEL org.opencontainers.image.description="My custom base image"
+    LABEL org.opencontainers.image.description="My awesome app image"
     ```
 
 ## Bonus assignments
@@ -123,5 +130,5 @@ Create a Dockerfile for the app and test it!
 1. Use `docker compose up --detach` to build and launch all our containers (in the same virtual network).
 2. Try executing into on of the running containers (`docker compose exec -it <service-name> /bin/bash`).
 3. Try to fetch our HTML website from `static-web-app` via the `ubuntu-debugger` container.
-4. Try fetching logs from our `static-web-app` via cmd `docker compose logs --follow <service-name>`, can you see the fetch?
+4. Try fetching logs from our `static-web-app` via cmd `docker compose logs --follow <service-name>`, can you see when it was fetched?
 5. Try reducing some of the container image sizes! Check with `docker images`.
