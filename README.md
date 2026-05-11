@@ -16,6 +16,11 @@ Have these documentation sites in hand when doing the assignments:
 - https://docs.docker.com/guides/dotnet/containerize/
 - https://docs.docker.com/guides/golang/build-images/
 
+## CLI Demo
+The folder [CLI Demo](./cli-demo) contains examples of using the Docker CLI to quickly spin up containerised apps.
+
+It also contains a Spring Boot + DB example at [cli-demo/spring-postgres](./cli-demo/spring-postgres) , which can be helpful to investigate.
+
 ## Assignments
 
 1. Containerize each app, starting with the lang/tech you feel most comfortable with. See TASKS further down in this readme.
@@ -72,7 +77,7 @@ Simple scratch-based go app that just outputs the contents of a .txt file
 1. This task is purely educational. Inspect the Dockerfile and learn about `scratch`
 2. Build the container image and check its disk-size! `docker images | grep <image-tag>`
 
-### java-hello-world
+### 4. java-hello-world
 
 Simple hello-world app in Java.
 
@@ -81,14 +86,14 @@ Simple hello-world app in Java.
 2. Run the container image and change who it says hello to at runtime.
 3. Make the container print the contents of a local file by volume mapping it into the container.
 
-### java-hello-world-pom
+### 5. java-hello-world-pom
 
 #### TASK
 1. Containerize the maven-based Java hello-world app.
 2. Run the container image and change who it says hello to at runtime.
 3. Make the container print the contents of a local file by volume mapping it into the container.
 
-### dotnet-hello-world
+### 6. dotnet-hello-world
 
 Simple hello-world app in .NET 10
 
