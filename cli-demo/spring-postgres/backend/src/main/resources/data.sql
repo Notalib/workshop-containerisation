@@ -1,3 +1,1 @@
-INSERT INTO GREETINGS(name) values ('Docker');
-INSERT INTO GREETINGS(name) values ('Workshop');
-INSERT INTO GREETINGS(name) values ('The Future');
+INSERT INTO GREETINGS(name) VALUES ('Docker'), ('Workshop'), ('The Future') ON CONFLICT (name) DO NOTHING;
