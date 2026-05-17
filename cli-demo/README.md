@@ -224,7 +224,20 @@ docker compose down --volumes
 
 ---
 
-# 7. Cleanup
+# 7. Volume mounting
+
+We can mount in volumes using the CLI with the `--volume` or `-v` argument.
+
+Volumes can be either relative or absolute paths on your machine - or the name of a docker volume.
+
+Example:
+```bash
+docker run --volume ./web:/usr/share/nginx/html --detach --publish 8080:80 --name web nginx
+```
+
+---
+
+# 8. Cleanup
 
 Remove containers:
 
