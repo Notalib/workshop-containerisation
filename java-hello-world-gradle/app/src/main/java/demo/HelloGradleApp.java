@@ -15,7 +15,7 @@ public class HelloGradleApp {
         ((ch.qos.logback.classic.Logger) logger).setLevel(Level.INFO);
 
         // Use ENV variable to set name, default to "World".
-        String name = System.getenv().getOrDefault("NAME", "Worldddd");
+        String name = System.getenv().getOrDefault("NAME", "World");
         String messagePath = System.getenv().getOrDefault("MESSAGE_PATH", "/data/message.txt");
 
         logger.info("Starting demo application...");

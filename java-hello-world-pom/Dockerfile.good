@@ -20,6 +20,8 @@ FROM eclipse-temurin:21-jre
 LABEL org.opencontainers.image.source=https://github.com/notalib/workshop-containerisation
 LABEL org.opencontainers.image.description="Java hello-world example app built with maven"
 
+COPY message.txt /data/message.txt
+
 WORKDIR /app
 
 # ⭐ Copy built far jar into the runtime image

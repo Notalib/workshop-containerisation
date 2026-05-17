@@ -27,7 +27,7 @@ LABEL org.opencontainers.image.description="Simple dotnet sample app"
 
 RUN apk upgrade --no-cache --update && \
     apk add --no-cache --update tzdata && \
-    cp -r /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime && \
+    ln -sf /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime && \
     echo "Europe/Copenhagen" >  /etc/timezone
 
 # Only necessary for debian-based runtime (not alpine)
@@ -51,7 +51,5 @@ ENV DOTNET_ENVIRONMENT="Development"
 USER $APP_UID
 
 WORKDIR /app
-
-# TODO: Copy in the built dotnet app from previous stage
 
 ENTRYPOINT [ "dotnet", "hello-world.dll" ]

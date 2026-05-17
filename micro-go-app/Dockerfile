@@ -9,14 +9,14 @@ ARG TARGETARCH
 WORKDIR /src
 
 # Fetch go requirements
-COPY go.mod cat.go ./
+COPY go.mod go.sum* ./
 RUN go mod download
 
 # Copy sources
 COPY *.go ./
 
 # Build go native executable
-RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=0 GOOS=linux go build -o /output
+RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=0 go build -o /output
 
 ###################
 ## Runtime stage ##

@@ -1,6 +1,6 @@
 # This is the extremely simple Dockerfile example from the workshop presentation
 FROM docker.io/ubuntu:26.04
-RUN apt update && apt install -y openjdk-21-jdk
+RUN apt-get update && apt-get install -y openjdk-21-jdk
 WORKDIR /app
 COPY Hello.java .
 RUN javac Hello.java

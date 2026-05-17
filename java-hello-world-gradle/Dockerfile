@@ -28,8 +28,8 @@ WORKDIR /src
 RUN mkdir -p ./app
 
 # ⭐ Copy in gradle settings and build files
-COPY settings.gradle.kts ./ \
-     app/build.gradle.kts ./
+COPY settings.gradle.kts ./
+COPY app/build.gradle.kts app/
 
 # ⭐ Let gradle resolve all dependencies first
 RUN --mount=type=cache,target=/cache/.gradle \
