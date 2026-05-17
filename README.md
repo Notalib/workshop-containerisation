@@ -116,8 +116,10 @@ Create a Dockerfile for the app and test it!
 - Minimize layers by combining related commands.
 - Split Dockerfile into build and runtime stages! (massively reduces image size)
 - Use .dockerignore to reduce the build-context and image size.
-- Pin versions! Use `FROM alpine:3.19.0` rather than just `alpine` or `alpine:latest`.
-  - Use of `:stable` tags might be a good idea if available.
+- Pin base image versions — avoid `alpine` or `alpine:latest`. From least to most strict:
+  - **Major/minor tag** (e.g. `eclipse-temurin:21-jre`, `nginx:stable`) — fine for workshops and dev; you still get security patches.
+  - **Full version tag** (e.g. `alpine:3.19.0`) — recommended for production.
+  - **Digest pin** (e.g. `alpine@sha256:...`) — fully reproducible builds; pair with a tool like Renovate/Dependabot to keep it updated.
 - Add metadata to your container images!
     ```
     LABEL org.opencontainers.image.source="https://github.com/org/repo"
@@ -131,4 +133,4 @@ Create a Dockerfile for the app and test it!
 2. Try executing into on of the running containers (`docker compose exec -it <service-name> /bin/bash`).
 3. Try to fetch our HTML website from `static-web-app` via the `ubuntu-debugger` container.
 4. Try fetching logs from our `static-web-app` via cmd `docker compose logs --follow <service-name>`, can you see when it was fetched?
-5. Try reducing some of the container image sizes! Check with `docker images`.
+5. Try reducing some of the container image sizes! Check size with `docker images`.

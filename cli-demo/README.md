@@ -39,23 +39,11 @@ docker run -d \
   postgres
 ```
 
-Connect to it:
+Confirm it's up and accepting connections:
 
 ```bash
-docker exec --interactive --tty db psql -U postgres
-```
-
-Inside `psql`:
-
-```sql
-CREATE TABLE demo (
-    id SERIAL PRIMARY KEY,
-    name TEXT
-);
-
-INSERT INTO demo (name) VALUES ('containers are cool');
-
-SELECT * FROM demo;
+docker logs db
+telnet 127.0.0.1 5432
 ```
 
 ## Observations
@@ -107,8 +95,10 @@ docker run --rm python:3.12 python --version
 
 ## Multiple JDK versions side-by-side
 ```bash
-docker run --rm openjdk:17 java -version
-docker run --rm openjdk:21 java -version
+# NOTE: eclipse-temurin = OpenJDK binaries
+docker run --rm eclipse-temurin:17 java -version
+docker run --rm eclipse-temurin:21 java -version
+docker run --rm eclipse-temurin:latest java -version
 ```
 
 ## Observations
@@ -116,14 +106,6 @@ docker run --rm openjdk:21 java -version
 - Multiple versions simultaneously
 - No dependency conflicts
 - Perfect reproducibility
-
----
-
-# 5. Spring Boot app in one command
-
-```bash
-docker run --publish 8080:8080 springio/gs-spring-boot-docker
-```
 
 ---
 
@@ -189,6 +171,8 @@ This is called :star2: Infrastructure as Code :star2:
 
 ## Official Spring Boot + Postgres Sample (modified)
 
+A full JVM application + database stack — no local JDK, no local Postgres, just one command.
+
 This is a modified version of spring-postgres example from [compose-awesome.](https://github.com/docker/awesome-compose).
 
 Entire system/stack is defined in: [spring-postgres/compose.yml](./spring-postgres/compose.yaml)
@@ -208,6 +192,11 @@ This sample is specifically built around:
 :magic_wand: Start the entire stack
 ```bash
 docker compose up --detach --build
+```
+
+:pencil: Add a greeting via the `/new` form at [http://localhost:8080/new](http://localhost:8080/new), then peek at the actual table inside the running database container:
+```bash
+docker compose exec db psql -U postgres -d example -c "SELECT * FROM greetings;"
 ```
 
 :stop_sign: Stop the stack
@@ -235,7 +224,20 @@ docker compose down --volumes
 
 ---
 
-# 7. Cleanup
+# 7. Volume mounting
+
+We can mount in volumes using the CLI with the `--volume` or `-v` argument.
+
+Volumes can be either relative or absolute paths on your machine - or the name of a docker volume.
+
+Example:
+```bash
+docker run --volume ./web:/usr/share/nginx/html --detach --publish 8080:80 --name web nginx
+```
+
+---
+
+# 8. Cleanup
 
 Remove containers:
 

@@ -16,7 +16,7 @@ services:
       - db
     ports:
       - "8081:80"
-    restart: unless-stoppedd
+    restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wp
