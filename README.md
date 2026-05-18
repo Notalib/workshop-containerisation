@@ -16,11 +16,16 @@ Have these documentation sites in hand when doing the assignments:
 - https://docs.docker.com/reference/dockerfile/
 - https://docs.docker.com/guides/java/containerize/
 - https://docs.docker.com/guides/dotnet/containerize/
-- https://docs.docker.com/guides/golang/build-images/
+
+## Repo layout
+
+- `<num>-<name>/` — apps for **you** to containerize. Work through these as exercises.
+- `edu-<name>/` — already-containerized educational examples. Read, run, learn from them.
+- [cli-demo/](./cli-demo/) — live-demo walkthrough showing the power of the Docker CLI & Compose.
 
 ## Assignments
 
-1. Containerize each app, starting with the lang/tech you feel most comfortable with. See TASKS further down in this readme.
+1. Containerize each app in the numbered folders, starting with the lang/tech you feel most comfortable with. See TASKS further down in this readme.
 2. Try to first create a single-stage `Dockerfile` to build and run the app.
   - It must automatically start the application when using `docker run <image-name>`
 3. Then split your `Dockerfile` into a **build** stage and a **runner/app** stage.
@@ -50,7 +55,7 @@ git checkout -t origin/solutions
 - Keep running: `docker run --detached <image-tag>` (runs in background until done)
 - Debug: `docker run --interactive --tty --entrypoint /bin/bash <image-tag>`
 
-### 1. ubuntu-debugger
+### [1-ubuntu-debugger](./1-ubuntu-debugger/)
 
 Simple image that extends Ubuntu 24.04 distro with some extra network debugging tools.
 Useful to understand base-images and layering
@@ -60,26 +65,7 @@ Useful to understand base-images and layering
 1. Start with `FROM ubuntu:24.04` and then make sure curl and dnsutils are installed in the container image.
 2. Start and execute into the container image, then try using the `curl` and `nslookup` tools.
 
-### 2. static-web-app
-
-Static nginx-based web-app which hosts static HTML files.
-
-#### TASK
-
-1. Create a static http web-app that hosts our static replacement `index.html` file.
-2. You can use `nginx`, `python -m http.server` or any other way to host the static `html/index.html` file via HTTP on an exposed port.
-
-### 3. micro-go-app
-
-Simple scratch-based go app that just outputs the contents of a .txt file
-
-#### TASK
-
-1. This task is purely educational. Inspect the Dockerfile and learn about `scratch`
-2. Build the container image and check its disk-size! `docker images | grep <image-tag>`
-3. (Bonus) Inject another file into the container for it to print out.
-
-### java-hello-world
+### [2-java-hello-world](./2-java-hello-world/)
 
 Simple hello-world app in Java.
 
@@ -88,16 +74,18 @@ Simple hello-world app in Java.
 2. Run the container image and change who it says hello to at runtime.
 3. Make the container print the contents of a local file by volume mapping it into the container.
 
-### java-hello-world-pom
+### [3-java-hello-world-pom](./3-java-hello-world-pom/)
+
+Maven-based Java hello-world app.
 
 #### TASK
 1. Containerize the maven-based Java hello-world app.
 2. Run the container image and change who it says hello to at runtime.
 3. Make the container print the contents of a local file by volume mapping it into the container.
 
-### dotnet-hello-world
+### [4-dotnet-hello-world](./4-dotnet-hello-world/)
 
-Simple hello-world app in .NET 10
+Simple hello-world app in .NET 10.
 
 Create a Dockerfile for the app and test it!
 
@@ -105,6 +93,31 @@ Create a Dockerfile for the app and test it!
 
 1. Follow Microsoft's guide on containerizing dotnet apps
 2. See https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows&pivots=dotnet-10-0
+
+### [5-static-web-app](./5-static-web-app/)
+
+Static nginx-based web-app which hosts static HTML files.
+
+#### TASK
+
+1. Create a static http web-app that hosts our static replacement `index.html` file.
+2. You can use `nginx`, `python -m http.server` or any other way to host the static `html/index.html` file via HTTP on an exposed port.
+
+## Educational examples (already containerized)
+
+These are not exercises — they're ready-to-run examples to study and play with.
+
+### [edu-micro-go-app](./edu-micro-go-app/)
+
+A `scratch`-based Go app that prints the contents of a `.txt` file. Inspect the Dockerfile to see how multi-stage + `FROM scratch` produces tiny images. Build it and check the image size with `docker images`.
+
+### [edu-distroless](./edu-distroless/)
+
+A distroless Go app with a walkthrough on how to debug containers that have no shell (using `cdebug`, `netshoot`, etc.).
+
+### [edu-spring-postgres](./edu-spring-postgres/)
+
+A full Spring Boot + Postgres stack defined entirely with Docker Compose — no local JDK or database needed. Demonstrates multi-service Compose, networking, and volume persistence.
 
 ## Best practices
 

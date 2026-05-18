@@ -169,58 +169,9 @@ This is called :star2: Infrastructure as Code :star2:
 
 # 6. Docker Compose Example
 
-## Official Spring Boot + Postgres Sample (modified)
+A full JVM application + database stack — Spring Boot + Postgres — defined entirely in a single `compose.yaml`. No local JDK, no local Postgres, just one command.
 
-A full JVM application + database stack — no local JDK, no local Postgres, just one command.
-
-This is a modified version of spring-postgres example from [compose-awesome.](https://github.com/docker/awesome-compose).
-
-Entire system/stack is defined in: [spring-postgres/compose.yml](./spring-postgres/compose.yaml)
-
-This sample is specifically built around:
-- Spring Boot
-- PostgreSQL
-- Docker Compose
-- Container networking
-- Persistence wiring (data survives container deletion)
-
-## Additions by ddfreiling
-- Added /new form to add greeting
-- Added /greetings endpoint to show all greetings.
-
-## Commands
-:magic_wand: Start the entire stack
-```bash
-docker compose up --detach --build
-```
-
-:pencil: Add a greeting via the `/new` form at [http://localhost:8080/new](http://localhost:8080/new), then peek at the actual table inside the running database container:
-```bash
-docker compose exec db psql -U postgres -d example -c "SELECT * FROM greetings;"
-```
-
-:stop_sign: Stop the stack
-```bash
-docker compose stop
-```
-
-:boom: Delete it *all*
-```bash
-docker compose down --volumes
-```
-
-## Questions
-- What happened to the data? Did your greetings survive?
-
-## Observations
-
-- Entire system stack defined as code
-- One command deployment
-- Application + infrastructure integration
-- Environment-driven configuration
-- No local JDK or database required
-- Automatic networking
-- Portable infrastructure
+See [edu-spring-postgres/README.md](../edu-spring-postgres/README.md) for the walkthrough and commands.
 
 ---
 
