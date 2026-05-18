@@ -3,6 +3,7 @@
 <head>
   <title>Greetings</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style>body { margin: 40px; font-family: Roboto; font-size: 20px; }</style>
 </head>
 <body>
   <h1>Greetings</h1>
