@@ -36,7 +36,7 @@ public class HomeController {
         log.info("Loaded greeting: {}", dockerGreeting.getName());
         model = model.addAttribute("name", dockerGreeting.getName());
         model = model.addAttribute("body", "Connected to database: " + datasourceUrl);
-        return "home";
+        return "greeting-single";
     }
 
     @GetMapping("/greetings")
@@ -61,7 +61,7 @@ public class HomeController {
         log.info("Found greeting #{}: {}", id, greeting.getName());
         model.addAttribute("name", greeting.getName());
         model.addAttribute("body", "Greeting #" + id);
-        return "home";
+        return "greeting-single";
     }
 
     @GetMapping("/new")
