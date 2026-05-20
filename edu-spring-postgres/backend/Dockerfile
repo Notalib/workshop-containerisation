@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.4
+# syntax=docker/dockerfile:1.6
 
 # Stage 1: Build
 FROM maven:3.9.14-eclipse-temurin-25-alpine AS builder
