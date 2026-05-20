@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.4
 
-FROM --platform=$BUILDPLATFORM maven:3.9-eclipse-temurin-17 AS builder
+FROM --platform=$BUILDPLATFORM maven:3.9-eclipse-temurin-21 AS builder
 WORKDIR /workdir/server
 COPY pom.xml /workdir/server/pom.xml
 RUN mvn dependency:go-offline
@@ -13,7 +13,7 @@ RUN mkdir -p target/dependency
 WORKDIR /workdir/server/target/dependency
 RUN jar -xf ../*.jar
 
-FROM eclipse-temurin:17-jre-noble
+FROM eclipse-temurin:21-jre-noble
 
 EXPOSE 8080
 VOLUME /tmp
