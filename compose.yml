@@ -30,6 +30,8 @@ services:
       context: ./6-python-jupyter
       dockerfile: Dockerfile.solution
     image: workshop/python-jupyter
+    volumes:
+      - ./6-python-jupyter/notebooks:/app
     ports:
       - "127.0.0.1:8888:8888"
 

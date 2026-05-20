@@ -26,12 +26,12 @@ Make a `Dockerfile` that:
 Then build and run it:
 
 ```bash
-docker build ./6-python-jupyter --tag workshop/python-jupyter
-docker run --rm -p 127.0.0.1:8888:8888 workshop/python-jupyter
+docker build . --tag python-jupyter
+docker run --rm -p 127.0.0.1:8888:8888 python-jupyter
 ```
 
 Open <http://127.0.0.1:8888/lab?token=workshop> in your browser and run
-`notebook_analysis.ipynb` end-to-end.
+`data_analysis.ipynb` end-to-end.
 
 ### First use a single stage, then split it into a build and runtime stage.
 
@@ -46,7 +46,7 @@ your host (and vice versa):
 ```bash
 docker run --rm -p 127.0.0.1:8888:8888 \
   -v "./notebooks:/app" \
-  workshop/python-jupyter
+  python-jupyter
 ```
 
 Edit a notebook, save, and confirm the file on host disk has changed.
@@ -70,3 +70,5 @@ By default they download on first run, which is slow and breaks if the
 container has no internet. Pre-fetch them during `docker build` and set
 `HF_HOME` so the notebooks find the cached weights — the image then starts
 instantly and works fully offline.
+
+This is not easy stuff, so look at the `Dockerfile.solution` if stuck.

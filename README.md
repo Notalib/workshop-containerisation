@@ -1,8 +1,33 @@
 # Exercises for Containerisation Workshop
 
-Create Dockerfiles for these applications
+This repo contains example applications for containerization. Some are educational and already containerized, others are prefixed with a number and ready for containerization.
 
-## Pre-requisites
+## Repo layout
+
+- `<num>-<name>/` — apps for **you** to containerize. Work through these as exercises.
+  - Difficulty progresses with numbering from 1 to 6.
+  - Highly suggest starting with [1-ubuntu-debugger](./1-ubuntu-debugger/Dockerfile)
+- `edu-<name>/` — already-containerized educational examples. Read, run and learn from them.
+- [cli-demo/](./cli-demo/) — live-demo walkthrough showing the power of the Docker CLI.
+
+## Educational examples
+
+These are not exercises — they're ready-to-run examples to study and play with.
+They contain completed Dockerfiles ready to build and run.
+
+### [edu-micro-go-app](./edu-micro-go-app/)
+
+A `scratch`-based Go app that prints the contents of a `.txt` file. Inspect the Dockerfile to see how multi-stage + `FROM scratch` produces tiny images. Build it and check the image size with `docker images`.
+
+### [edu-distroless](./edu-distroless/)
+
+A distroless Go app with a walkthrough on how to debug containers that have no shell (using `cdebug`, `netshoot`, etc.).
+
+### [edu-spring-postgres](./edu-spring-postgres/)
+
+A full Spring Boot + Postgres stack defined entirely with Docker Compose — no local JDK or database needed. Demonstrates multi-service Compose, networking, and volume persistence.
+
+## Exercise Pre-requisites
 
 - Install **Rancher Desktop (Recommended!)**
   - Make sure `~/.rd/bin` is on your PATH!
@@ -17,13 +42,7 @@ Have these documentation sites in hand when doing the assignments:
 - https://docs.docker.com/guides/java/containerize/
 - https://docs.docker.com/guides/dotnet/containerize/
 
-## Repo layout
-
-- `<num>-<name>/` — apps for **you** to containerize. Work through these as exercises.
-- `edu-<name>/` — already-containerized educational examples. Read, run, learn from them.
-- [cli-demo/](./cli-demo/) — live-demo walkthrough showing the power of the Docker CLI & Compose.
-
-## Assignments
+## Exercises
 
 1. Containerize each app in the numbered folders, starting with the lang/tech you feel most comfortable with. See TASKS further down in this readme.
 2. Try to first create a single-stage `Dockerfile` to build and run the app.
@@ -32,7 +51,7 @@ Have these documentation sites in hand when doing the assignments:
 
 ### Solutions
 
-If you're completely stuck or just want to compare, solutions can be found on the `solutions` branch.
+If you're completely stuck or just want to compare, solutions can be found on the [solutions](https://github.com/Notalib/workshop-containerisation/tree/solutions) branch.
 
 ```bash
 git checkout -t origin/solutions
@@ -57,12 +76,12 @@ git checkout -t origin/solutions
 
 ### [1-ubuntu-debugger](./1-ubuntu-debugger/)
 
-Simple image that extends Ubuntu 24.04 distro with some extra network debugging tools.
+Simple image that extends Ubuntu 26.04 distro with some extra network debugging tools.
 Useful to understand base-images and layering
 
 #### TASK
 
-1. Start with `FROM ubuntu:24.04` and then make sure curl and dnsutils are installed in the container image.
+1. Start with `FROM ubuntu:26.04` and then make sure curl and dnsutils are installed in the container image.
 2. Start and execute into the container image, then try using the `curl` and `nslookup` tools.
 
 ### [2-java-hello-world](./2-java-hello-world/)
@@ -117,22 +136,6 @@ Containerising it pins everything
 2. Start Jupyter Lab on an exposed port and open a notebook from your host browser.
 3. Volume-mount the folder so notebook edits persist back to your host.
 
-## Educational examples (already containerized)
-
-These are not exercises — they're ready-to-run examples to study and play with.
-
-### [edu-micro-go-app](./edu-micro-go-app/)
-
-A `scratch`-based Go app that prints the contents of a `.txt` file. Inspect the Dockerfile to see how multi-stage + `FROM scratch` produces tiny images. Build it and check the image size with `docker images`.
-
-### [edu-distroless](./edu-distroless/)
-
-A distroless Go app with a walkthrough on how to debug containers that have no shell (using `cdebug`, `netshoot`, etc.).
-
-### [edu-spring-postgres](./edu-spring-postgres/)
-
-A full Spring Boot + Postgres stack defined entirely with Docker Compose — no local JDK or database needed. Demonstrates multi-service Compose, networking, and volume persistence.
-
 ## Best practices
 
 - Minimize layers by combining related commands.
@@ -149,7 +152,7 @@ A full Spring Boot + Postgres stack defined entirely with Docker Compose — no 
     LABEL org.opencontainers.image.description="My awesome app image"
     ```
 
-## Bonus assignments
+## Bonus exercises
 
 1. Use `docker compose up --detach` to build and launch all our containers (in the same virtual network).
 2. Try executing into on of the running containers (`docker compose exec -it <service-name> /bin/bash`).

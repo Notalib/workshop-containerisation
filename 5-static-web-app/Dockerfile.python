@@ -1,5 +1,6 @@
 # In this modified http-server we use a distroless python3 base-image from Google
-FROM gcr.io/distroless/python3-debian12
+# :debug is a variant with "sh" shell available for debugging.
+FROM gcr.io/distroless/python3-debian13:debug
 
 WORKDIR /app
 
@@ -7,6 +8,5 @@ COPY html /app
 
 EXPOSE 80
 
+# Host our static website via Python's http.server.
 ENTRYPOINT ["python3", "-m", "http.server", "80"]
-
-# If not defined, we inherit the ENTRYPOINT from base image
