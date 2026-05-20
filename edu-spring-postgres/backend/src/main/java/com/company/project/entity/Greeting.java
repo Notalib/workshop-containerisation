@@ -1,60 +1,65 @@
 package com.company.project.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.util.UUID;
 
 @Entity
 @Table(name = "GREETINGS")
 public class Greeting {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
+  private String name;
 
-    public Greeting() {
-    }
+  public Greeting() {
+  }
 
-    public Greeting(String name) {
-        this.name = name;
-    }
+  public Greeting(String name) {
+    this.name = name;
+  }
 
-    public Greeting(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+  public Greeting(UUID id, String name) {
+    this.id = id;
+    this.name = name;
+  }
 
-    public int getId() {
-        return id;
-    }
+  public UUID getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(UUID id) {
+    this.id = id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+  @Override
+  public boolean equals(Object o) {
+      if (this == o) {
+          return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+          return false;
+      }
 
-        Greeting greeting = (Greeting) o;
+    Greeting greeting = (Greeting) o;
 
-        return name.equals(greeting.name);
-    }
+    return name.equals(greeting.name);
+  }
 
-    @Override
-    public int hashCode() {
-        return name.hashCode();
-    }
+  @Override
+  public int hashCode() {
+    return name.hashCode();
+  }
 }

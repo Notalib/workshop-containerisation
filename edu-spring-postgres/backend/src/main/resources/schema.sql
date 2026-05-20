@@ -1,4 +1,4 @@
 CREATE TABLE IF NOT EXISTS GREETINGS (
-    id serial PRIMARY KEY,
+    id UUID PRIMARY KEY,
     name varchar(50) NOT NULL UNIQUE
 );
