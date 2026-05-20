@@ -1,11 +1,8 @@
 package com.company.project;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.client.RestTestClient;
@@ -40,32 +37,27 @@ class HomeControllerIntegrationTest {
 
     @Test
     void testHomeEndpoint() {
-        String greeting = restTestClient.get()
+        restTestClient.get()
           .uri("/")
           .exchange()
           .expectStatus().isOk()
-          .expectBody(new ParameterizedTypeReference<String>() {})
-          .returnResult()
-          .getResponseBody();
-
-        assertEquals("""
-                     <!DOCTYPE HTML>
-                     <html>
-                     <head>
-                       <title>Getting Started: Serving Web Content</title>
-                       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-                       <style>body { margin: 40px; font-family: Roboto; font-size: 20px; }</style>
-                     </head>
-                     <body>
-                       <p>Hello from Spring Boot in Docker!</p>
-                       <p>Connected to database!</p>
-                       <h2>Other pages:</h2>
-                       <ul>
-                         <li><a href="/greetings">All greetings</a></li>
-                         <li><a href="/new">New greeting</a></li>
-                       </ul>
-                     </body>
-                     """, greeting);
-
+          .expectBody(String.class).isEqualTo("""
+             <!DOCTYPE HTML>
+             <html>
+             <head>
+               <title>Getting Started: Serving Web Content</title>
+               <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+               <style>body { margin: 40px; font-family: Roboto; font-size: 20px; }</style>
+             </head>
+             <body>
+               <p>Hello from Spring Boot in Docker!</p>
+               <p>Connected to database!</p>
+               <h2>Other pages:</h2>
+               <ul>
+                 <li><a href="/greetings">All greetings</a></li>
+                 <li><a href="/new">New greeting</a></li>
+               </ul>
+             </body>
+             """);
     }
 }
