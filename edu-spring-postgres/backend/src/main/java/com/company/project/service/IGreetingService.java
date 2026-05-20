@@ -6,11 +6,11 @@ import java.util.UUID;
 
 public interface IGreetingService {
 
-  Optional<Greeting> showHome(String name);
+    Optional<Greeting> showHome(String name);
 
-  Iterable<Greeting> listGreetings();
+    Iterable<Greeting> listGreetings();
 
-  Optional<Greeting> sayHello(UUID id);
+    Optional<Greeting> sayHello(UUID id);
 
-  Greeting createGreeting(String name);
+    Greeting createGreeting(String name);
 }

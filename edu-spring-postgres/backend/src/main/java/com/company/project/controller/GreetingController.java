@@ -18,61 +18,60 @@ import org.springframework.web.server.ResponseStatusException;
 @Controller
 public class GreetingController {
 
-  private static final Logger log = LoggerFactory.getLogger(GreetingController.class);
+    private static final Logger log = LoggerFactory.getLogger(GreetingController.class);
 
-  private final IGreetingService iGreetingService;
+    private final IGreetingService iGreetingService;
 
-  @Autowired
-  public GreetingController(IGreetingService iGreetingService) {
-    this.iGreetingService = iGreetingService;
-  }
+    @Autowired
+    public GreetingController(IGreetingService iGreetingService) {
+        this.iGreetingService = iGreetingService;
+    }
 
-  @GetMapping("/")
-  public String showHome(Model model) {
-    String greetingDocker = "Docker";
-    log.info("GET / — loading default greeting with name='{}'", greetingDocker);
-    Greeting dockerGreeting = iGreetingService.showHome(greetingDocker).orElseThrow(() -> {
-          log.warn("Greeting with name='{}' not found", greetingDocker);
-          return new ResponseStatusException(HttpStatus.NOT_FOUND, "Greeting '" + greetingDocker + "' not found");
+    @GetMapping("/")
+    public String showHome(Model model) {
+        String greetingDocker = "Docker";
+        log.info("GET / — loading default greeting with name='{}'", greetingDocker);
+        Greeting dockerGreeting = iGreetingService.showHome(greetingDocker).orElseThrow(() -> {
+            log.warn("Greeting with name='{}' not found", greetingDocker);
+            return new ResponseStatusException(HttpStatus.NOT_FOUND, "Greeting '" + greetingDocker + "' not found");
         });
-    log.info("Loaded greeting: '{}'", dockerGreeting.getName());
-    model.addAttribute("name", dockerGreeting.getName());
-    model.addAttribute("body", "Connected to database!");
-    return "greeting-single";
-  }
+        log.info("Loaded greeting: '{}'", dockerGreeting.getName());
+        model.addAttribute("name", dockerGreeting.getName());
+        model.addAttribute("body", "Connected to database!");
+        return "greeting-single";
+    }
 
-  @GetMapping("/greetings")
-  public String listGreetings(Model model) {
-    log.info("GET /greetings — listing all greetings");
-    Iterable<Greeting> greetings = iGreetingService.listGreetings();
-    model.addAttribute("greetings", greetings);
-    return "greetings";
-  }
+    @GetMapping("/greetings")
+    public String listGreetings(Model model) {
+        log.info("GET /greetings — listing all greetings");
+        Iterable<Greeting> greetings = iGreetingService.listGreetings();
+        model.addAttribute("greetings", greetings);
+        return "greetings";
+    }
 
-  @GetMapping("/greetings/{id}")
-  public String sayHello(@PathVariable UUID id, Model model) {
-    log.info("GET /greetings/{} — looking up greeting", id);
-    Greeting greeting = iGreetingService.sayHello(id)
-        .orElseThrow(() -> {
-          log.warn("Greeting with id='{}' not found", id);
-          return new ResponseStatusException(HttpStatus.NOT_FOUND, "Greeting '" + id + "' not found");
+    @GetMapping("/greetings/{id}")
+    public String sayHello(@PathVariable UUID id, Model model) {
+        log.info("GET /greetings/{} — looking up greeting", id);
+        Greeting greeting = iGreetingService.sayHello(id).orElseThrow(() -> {
+            log.warn("Greeting with id='{}' not found", id);
+            return new ResponseStatusException(HttpStatus.NOT_FOUND, "Greeting '" + id + "' not found");
         });
-    log.info("Found greeting id='{}' name='{}'", id, greeting.getName());
-    model.addAttribute("name", greeting.getName());
-    model.addAttribute("body", "Greeting #" + id);
-    return "greeting-single";
-  }
+        log.info("Found greeting id='{}' name='{}'", id, greeting.getName());
+        model.addAttribute("name", greeting.getName());
+        model.addAttribute("body", "Greeting #" + id);
+        return "greeting-single";
+    }
 
-  @GetMapping("/new")
-  public String newGreetingForm() {
-    return "new";
-  }
+    @GetMapping("/new")
+    public String newGreetingForm() {
+        return "new";
+    }
 
-  @PostMapping("/greetings")
-  public String createGreeting(@RequestParam String name) {
-    log.info("POST /greetings — creating new greeting with name='{}'", name);
-    Greeting greeting = iGreetingService.createGreeting(name);
-    log.info("Saved new greeting id='{}' name='{}'", greeting.getId(), greeting.getName());
-    return "redirect:/greetings/" + greeting.getId();
-  }
+    @PostMapping("/greetings")
+    public String createGreeting(@RequestParam String name) {
+        log.info("POST /greetings — creating new greeting with name='{}'", name);
+        Greeting greeting = iGreetingService.createGreeting(name);
+        log.info("Saved new greeting id='{}' name='{}'", greeting.getId(), greeting.getName());
+        return "redirect:/greetings/" + greeting.getId();
+    }
 }

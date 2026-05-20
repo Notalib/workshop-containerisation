@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IGreetingRepository extends CrudRepository<Greeting, UUID> {
-  Optional<Greeting> findGreetingByName(String name);
+    Optional<Greeting> findGreetingByName(String name);
 }

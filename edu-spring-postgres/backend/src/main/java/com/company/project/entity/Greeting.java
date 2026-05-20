@@ -11,55 +11,55 @@ import java.util.UUID;
 @Table(name = "GREETINGS")
 public class Greeting {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
-  private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-  public Greeting() {
-  }
+    private String name;
 
-  public Greeting(String name) {
-    this.name = name;
-  }
+    public Greeting() {}
 
-  public Greeting(UUID id, String name) {
-    this.id = id;
-    this.name = name;
-  }
+    public Greeting(String name) {
+        this.name = name;
+    }
 
-  public UUID getId() {
-    return id;
-  }
+    public Greeting(UUID id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-  public void setId(UUID id) {
-    this.id = id;
-  }
+    public UUID getId() {
+        return id;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  @Override
-  public boolean equals(Object o) {
-      if (this == o) {
-          return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-          return false;
-      }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    Greeting greeting = (Greeting) o;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-    return name.equals(greeting.name);
-  }
+        Greeting greeting = (Greeting) o;
 
-  @Override
-  public int hashCode() {
-    return name.hashCode();
-  }
+        return name.equals(greeting.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }
