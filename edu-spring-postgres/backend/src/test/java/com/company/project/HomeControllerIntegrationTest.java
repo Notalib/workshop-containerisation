@@ -1,11 +1,21 @@
 package com.company.project;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.EnabledIfDockerAvailable;
@@ -37,27 +47,115 @@ class HomeControllerIntegrationTest {
 
     @Test
     void testHomeEndpoint() {
-        restTestClient.get()
-          .uri("/")
-          .exchange()
-          .expectStatus().isOk()
-          .expectBody(String.class).isEqualTo("""
-             <!DOCTYPE HTML>
-             <html>
-             <head>
-               <title>Getting Started: Serving Web Content</title>
-               <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-               <style>body { margin: 40px; font-family: Roboto; font-size: 20px; }</style>
-             </head>
-             <body>
-               <p>Hello from Spring Boot in Docker!</p>
-               <p>Connected to database!</p>
-               <h2>Other pages:</h2>
-               <ul>
-                 <li><a href="/greetings">All greetings</a></li>
-                 <li><a href="/new">New greeting</a></li>
-               </ul>
-             </body>
-             """);
+        restTestClient
+                .get()
+                .uri("/")
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectBody(String.class)
+                .isEqualTo("""
+                    <!DOCTYPE HTML>
+                    <html>
+                    <head>
+                      <title>Getting Started: Serving Web Content</title>
+                      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                      <style>body { margin: 40px; font-family: Roboto; font-size: 20px; }</style>
+                    </head>
+                    <body>
+                      <p>Hello from Spring Boot in Docker!</p>
+                      <p>Connected to database!</p>
+                      <h2>Other pages:</h2>
+                      <ul>
+                        <li><a href="/greetings">All greetings</a></li>
+                        <li><a href="/new">New greeting</a></li>
+                      </ul>
+                    </body>
+                    """);
+    }
+
+    @Test
+    void testGreetingsEndpoint() {
+        RestTestClient.ResponseSpec responseSpec =
+                restTestClient.get().uri("/greetings").exchange().expectStatus().isOk();
+
+        assertNotNull(responseSpec.returnResult().toString());
+        Document document = Jsoup.parse(responseSpec.returnResult().toString());
+        assertEquals(1, document.select("h1:contains(Greetings)").size());
+        assertTrue(document.select("table tbody tr").size() >= 3);
+        assertEquals(1, document.select("table tbody tr td a:contains(Docker)").size());
+        assertEquals(
+                1, document.select("table tbody tr td a:contains(Workshop)").size());
+        assertEquals(
+                1, document.select("table tbody tr td a:contains(The Future)").size());
+    }
+
+    @Test
+    void testNewGreetingEndpoint() {
+        RestTestClient.ResponseSpec responseSpec =
+                restTestClient.get().uri("/new").exchange().expectStatus().isOk();
+
+        assertNotNull(responseSpec.returnResult().toString());
+        Document formPageDocument = Jsoup.parse(responseSpec.returnResult().toString());
+
+        assertTrue(formPageDocument.select("form#new-greeting").size() == 1);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
+        String newGreetingName = "Integration Test Greeting";
+        form.add("name", newGreetingName);
+
+        RestTestClient.ResponseSpec createResponse = restTestClient
+                .post()
+                .uri("/greetings")
+                .body(form)
+                .exchange()
+                .expectStatus()
+                .is3xxRedirection();
+
+        if (createResponse.returnResult().getResponseHeaders().getLocation().getPath() != null) {
+            String createdGreetingPath = createResponse
+                    .returnResult()
+                    .getResponseHeaders()
+                    .getLocation()
+                    .getPath();
+
+            assertTrue(createdGreetingPath.matches(
+                    "/greetings/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"));
+
+            RestTestClient.ResponseSpec createdGreetingResponse = restTestClient
+                    .get()
+                    .uri(createdGreetingPath)
+                    .exchange()
+                    .expectStatus()
+                    .isOk();
+
+            assertNotNull(createdGreetingResponse.returnResult().toString());
+
+            Document createdGreetingResponseDocument =
+                    Jsoup.parse(createdGreetingResponse.returnResult().toString());
+
+            assertEquals(
+                    1,
+                    createdGreetingResponseDocument
+                            .select("p:contains(" + newGreetingName + ")")
+                            .size());
+        }
+
+        RestTestClient.ResponseSpec greetingsResponse =
+                restTestClient.get().uri("/greetings").exchange().expectStatus().isOk();
+
+        assertNotNull(greetingsResponse.returnResult().toString());
+
+        Document greetingsResponseDocument =
+                Jsoup.parse(greetingsResponse.returnResult().toString());
+
+        assertEquals(
+                1,
+                greetingsResponseDocument
+                        .select("table tbody tr td a:contains(" + newGreetingName + ")")
+                        .size());
     }
 }
