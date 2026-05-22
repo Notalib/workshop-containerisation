@@ -4,7 +4,7 @@ This repo contains example applications for containerization. Some are education
 
 ## Repo layout
 
-- [Workshop Powerpoint](./Containerisation_workshop.pptx) - Theory parts presented during the workshop.
+- [Containerisation_workshop.pptx](https://github.com/Notalib/workshop-containerisation/raw/refs/heads/main/Containerisation_workshop.pptx) - Theory parts presented during the workshop.
 - [cli-demo/](./cli-demo/) — Live-demo showing the power of Containerisation & Docker CLI. It's run during the workshop.
 - `<num>-<name>/` — Apps for **you** to containerize. Work through these as exercises.
   - Difficulty progresses with numbering from 1 to 6.
