@@ -4,11 +4,12 @@ This repo contains example applications for containerization. Some are education
 
 ## Repo layout
 
-- `<num>-<name>/` — apps for **you** to containerize. Work through these as exercises.
+- [Workshop Powerpoint](./Containerisation_workshop.pptx) - Theory parts presented during the workshop.
+- [cli-demo/](./cli-demo/) — Live-demo showing the power of Containerisation & Docker CLI. It's run during the workshop.
+- `<num>-<name>/` — Apps for **you** to containerize. Work through these as exercises.
   - Difficulty progresses with numbering from 1 to 6.
-  - Highly suggest starting with [1-ubuntu-debugger](./1-ubuntu-debugger/Dockerfile)
-- `edu-<name>/` — already-containerized educational examples. Read, run and learn from them.
-- [cli-demo/](./cli-demo/) — live-demo walkthrough showing the power of the Docker CLI.
+  - Highly suggest starting with [1-ubuntu-debugger](./1-ubuntu-debugger/Dockerfile) to grasp the basics.
+- `edu-<name>/` — Already-containerized educational examples. Read, run and learn from them.
 
 ## Educational examples
 
