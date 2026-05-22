@@ -37,7 +37,7 @@ A full Spring Boot + Postgres stack defined entirely with Docker Compose — no 
 
 ## Docs
 
-Have these documentation sites in hand when doing the assignments:
+Have these documentation sites in hand when doing the exercises:
 - https://docs.docker.com/get-started/docker-overview/
 - https://docs.docker.com/reference/dockerfile/
 - https://docs.docker.com/guides/java/containerize/
