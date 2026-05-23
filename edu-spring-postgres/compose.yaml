@@ -1,8 +1,9 @@
 services:
 
   backend:
-    image: backend
+    image: ghcr.io/notalib/workshop-containerisation/spring-postgres
     build: ./backend
+    restart: unless-stopped
     ports:
       - 8888:8080
     environment:
@@ -11,21 +12,23 @@ services:
       - POSTGRES_PORT=5432
     secrets:
       - db-password
+    depends_on:
+      - db
     networks:
       - spring-postgres
 
   db:
     image: postgres:18.3-alpine3.23
-    restart: always
+    restart: unless-stopped
     secrets:
       - db-password
     volumes:
-      - db-data:/var/lib/postgresql/data
-    networks:
-      - spring-postgres
+      - db-data:/var/lib/postgresql
     environment:
       - POSTGRES_DB=example
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    networks:
+      - spring-postgres
     expose:
       - 5432
 

@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+# This exports the database password as an environment variable if it is provided as a Docker secret.
+# Sadly this still leaks the password in the process list, but it is a common pattern for Spring Boot applications do not have a way to read the password from a file directly.
 if [ -f /run/secrets/db-password ]; then
   export POSTGRES_PASSWORD="$(cat /run/secrets/db-password)"
 fi

@@ -29,7 +29,7 @@ public class GreetingController {
 
     @GetMapping("/")
     public String showHome(Model model) {
-        String greetingDocker = "Docker";
+        String greetingDocker = "Docker container";
         log.info("GET / — loading default greeting with name='{}'", greetingDocker);
         Greeting dockerGreeting = iGreetingService.showHome(greetingDocker).orElseThrow(() -> {
             log.warn("Greeting with name='{}' not found", greetingDocker);
@@ -37,6 +37,7 @@ public class GreetingController {
         });
         log.info("Loaded greeting: '{}'", dockerGreeting.getName());
         model.addAttribute("name", dockerGreeting.getName());
+        model.addAttribute("id", dockerGreeting.getId());
         model.addAttribute("body", "Connected to database!");
         return "greeting-single";
     }
@@ -58,7 +59,7 @@ public class GreetingController {
         });
         log.info("Found greeting id='{}' name='{}'", id, greeting.getName());
         model.addAttribute("name", greeting.getName());
-        model.addAttribute("body", "Greeting #" + id);
+        model.addAttribute("id", id);
         return "greeting-single";
     }
 
