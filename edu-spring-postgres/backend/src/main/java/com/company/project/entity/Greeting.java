@@ -5,33 +5,34 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.UUID;
 
 @Entity
 @Table(name = "GREETINGS")
 public class Greeting {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
     private String name;
 
-    public Greeting() {
-    }
+    public Greeting() {}
 
     public Greeting(String name) {
         this.name = name;
     }
 
-    public Greeting(int id, String name) {
+    public Greeting(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -45,8 +46,12 @@ public class Greeting {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Greeting greeting = (Greeting) o;
 
