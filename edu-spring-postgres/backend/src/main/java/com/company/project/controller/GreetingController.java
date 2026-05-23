@@ -5,7 +5,9 @@ import com.company.project.service.IGreetingService;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +24,17 @@ public class GreetingController {
 
     private final IGreetingService iGreetingService;
 
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
+
     @Autowired
     public GreetingController(IGreetingService iGreetingService) {
         this.iGreetingService = iGreetingService;
+    }
+
+    @PostConstruct
+    public void logDbConnection() {
+        log.info("DB connection URL: {}", dbUrl);
     }
 
     @GetMapping("/")
@@ -38,7 +48,7 @@ public class GreetingController {
         log.info("Loaded greeting: '{}'", dockerGreeting.getName());
         model.addAttribute("name", dockerGreeting.getName());
         model.addAttribute("id", dockerGreeting.getId());
-        model.addAttribute("body", "Connected to database!");
+        model.addAttribute("body", "Connected to database: " + dbUrl);
         return "greeting-single";
     }
 

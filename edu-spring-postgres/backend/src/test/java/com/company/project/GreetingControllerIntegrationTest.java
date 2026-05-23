@@ -47,31 +47,18 @@ class HomeControllerIntegrationTest {
 
     @Test
     void testHomeEndpoint() {
-        restTestClient
-                .get()
-                .uri("/")
-                .exchange()
-                .expectStatus()
-                .isOk()
-                .expectBody(String.class)
-                .isEqualTo("""
-                    <!DOCTYPE HTML>
-                    <html>
-                    <head>
-                      <title>Getting Started: Serving Web Content</title>
-                      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-                      <style>body { margin: 40px; font-family: Roboto; font-size: 20px; }</style>
-                    </head>
-                    <body>
-                      <p>Hello from Spring Boot in Docker!</p>
-                      <p>Connected to database!</p>
-                      <h2>Other pages:</h2>
-                      <ul>
-                        <li><a href="/greetings">All greetings</a></li>
-                        <li><a href="/new">New greeting</a></li>
-                      </ul>
-                    </body>
-                    """);
+        RestTestClient.ResponseSpec responseSpec =
+                restTestClient.get().uri("/").exchange().expectStatus().isOk();
+
+        assertNotNull(responseSpec.returnResult().toString());
+        Document document = Jsoup.parse(responseSpec.returnResult().toString());
+        assertEquals(1, document.select("h1:contains(Greeting)").size());
+        assertEquals(1, document.select("h1:contains(Other pages)").size());
+        assertEquals(1, document.select("a[href=/greetings]").size());
+        assertEquals(1, document.select("a[href=/new]").size());
+        assertEquals(1, document.select("p:contains(Hello from Spring Boot)").size());
+        assertEquals(1, document.select("p:contains(Connected to database)").size());
+        assertEquals(1, document.select("p:contains(" + postgreSQLContainer.getJdbcUrl() + ")").size());
     }
 
     @Test
@@ -83,11 +70,9 @@ class HomeControllerIntegrationTest {
         Document document = Jsoup.parse(responseSpec.returnResult().toString());
         assertEquals(1, document.select("h1:contains(Greetings)").size());
         assertTrue(document.select("table tbody tr").size() >= 3);
-        assertEquals(1, document.select("table tbody tr td a:contains(Docker)").size());
-        assertEquals(
-                1, document.select("table tbody tr td a:contains(Workshop)").size());
-        assertEquals(
-                1, document.select("table tbody tr td a:contains(The Future)").size());
+        assertTrue(document.select("table tbody tr td a:contains(Docker container)").size() == 1);
+        assertTrue(document.select("table tbody tr td a:contains(An awesome Workshop)").size() == 1);
+        assertTrue(document.select("table tbody tr td a:contains(The Future)").size() == 1);
     }
 
     @Test
