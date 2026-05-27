@@ -29,7 +29,8 @@ RUN python -c "from transformers import pipeline; pipeline('sentiment-analysis',
  && python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')"
 
 WORKDIR /app
-COPY --chown=jupyter:jupyter notebooks/*.ipynb ./
+
+COPY notebooks/*.ipynb ./
 COPY data/sales.csv /data/sales.csv
 
 EXPOSE 8888

@@ -8,7 +8,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS builder
 
 WORKDIR /src
 
-# TODO: Copy in source and build the dotnet app
+# TODO: COPY in source and build the dotnet app
 
 ###################
 ## Runtime stage ##
@@ -21,6 +21,6 @@ LABEL org.opencontainers.image.description="Simple dotnet sample app"
 
 WORKDIR /app
 
-# TODO: Copy in the built dotnet app from previous stage
+# TODO: COPY in the built dotnet app from previous stage (--from=builder)
 
 ENTRYPOINT [ "dotnet", "hello-world.dll" ]
