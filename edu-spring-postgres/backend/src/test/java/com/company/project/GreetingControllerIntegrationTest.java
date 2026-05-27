@@ -25,7 +25,7 @@ import org.testcontainers.postgresql.PostgreSQLContainer;
 @Testcontainers
 @EnabledIfDockerAvailable
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class HomeControllerIntegrationTest {
+class GreetingControllerIntegrationTest {
 
     @Container
     static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:18.3-alpine3.23");
@@ -47,11 +47,12 @@ class HomeControllerIntegrationTest {
 
     @Test
     void testHomeEndpoint() {
-        RestTestClient.ResponseSpec responseSpec =
-                restTestClient.get().uri("/").exchange().expectStatus().isOk();
+        String html = restTestClient.get().uri("/").exchange()
+            .expectStatus().isOk()
+            .expectBody(String.class)
+            .returnResult().getResponseBody();
 
-        assertNotNull(responseSpec.returnResult().toString());
-        Document document = Jsoup.parse(responseSpec.returnResult().toString());
+        Document document = Jsoup.parse(html);
         assertEquals(1, document.select("h1:contains(Greeting)").size());
         assertEquals(1, document.select("h1:contains(Other pages)").size());
         assertEquals(1, document.select("a[href=/greetings]").size());
@@ -63,11 +64,12 @@ class HomeControllerIntegrationTest {
 
     @Test
     void testGreetingsEndpoint() {
-        RestTestClient.ResponseSpec responseSpec =
-                restTestClient.get().uri("/greetings").exchange().expectStatus().isOk();
+        String html = restTestClient.get().uri("/greetings").exchange()
+            .expectStatus().isOk()
+            .expectBody(String.class)
+            .returnResult().getResponseBody();
 
-        assertNotNull(responseSpec.returnResult().toString());
-        Document document = Jsoup.parse(responseSpec.returnResult().toString());
+        Document document = Jsoup.parse(html);
         assertEquals(1, document.select("h1:contains(Greetings)").size());
         assertTrue(document.select("table tbody tr").size() >= 3);
         assertTrue(document.select("table tbody tr td a:contains(Docker container)").size() == 1);
@@ -77,11 +79,11 @@ class HomeControllerIntegrationTest {
 
     @Test
     void testNewGreetingEndpoint() {
-        RestTestClient.ResponseSpec responseSpec =
-                restTestClient.get().uri("/new").exchange().expectStatus().isOk();
-
-        assertNotNull(responseSpec.returnResult().toString());
-        Document formPageDocument = Jsoup.parse(responseSpec.returnResult().toString());
+        String html = restTestClient.get().uri("/new").exchange()
+            .expectStatus().isOk()
+            .expectBody(String.class)
+            .returnResult().getResponseBody();
+        Document formPageDocument = Jsoup.parse(html);
 
         assertTrue(formPageDocument.select("form#new-greeting").size() == 1);
 
@@ -119,8 +121,10 @@ class HomeControllerIntegrationTest {
 
             assertNotNull(createdGreetingResponse.returnResult().toString());
 
-            Document createdGreetingResponseDocument =
-                    Jsoup.parse(createdGreetingResponse.returnResult().toString());
+            Document createdGreetingResponseDocument = Jsoup.parse(createdGreetingResponse
+                    .expectStatus().isOk()
+                    .expectBody(String.class)
+                    .returnResult().getResponseBody());
 
             assertEquals(
                     1,
@@ -134,8 +138,10 @@ class HomeControllerIntegrationTest {
 
         assertNotNull(greetingsResponse.returnResult().toString());
 
-        Document greetingsResponseDocument =
-                Jsoup.parse(greetingsResponse.returnResult().toString());
+        Document greetingsResponseDocument = Jsoup.parse(greetingsResponse
+                .expectStatus().isOk()
+                .expectBody(String.class)
+                .returnResult().getResponseBody());
 
         assertEquals(
                 1,
