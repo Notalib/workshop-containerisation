@@ -44,4 +44,6 @@ RUN chmod +x /entrypoint.sh
 RUN addgroup --system spring && adduser --system --ingroup spring spring
 USER spring:spring
 
+EXPOSE 8080/tcp
+
 ENTRYPOINT ["/entrypoint.sh"]
