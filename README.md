@@ -147,7 +147,8 @@ Containerising it pins everything
   - **Full version tag** (e.g. `alpine:3.19.0`) — recommended for production.
   - **Digest pin** (e.g. `alpine@sha256:...`) — fully reproducible builds; pair with a tool like Renovate/Dependabot to keep it updated.
 - Tag your own container images with a semver (e.g. `my-app:1.2.3`)!
-  - If you keep pushing onto `:latest`, you will lose all old versions (no rollback possible).
+  - By default `image: my-app` will push onto `:latest` tag.
+  - If you keep pushing onto `:latest`, rollback becomes difficult.
 - Add metadata to your container images!
     ```
     LABEL org.opencontainers.image.source="https://github.com/org/repo"
