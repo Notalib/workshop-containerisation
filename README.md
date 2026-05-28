@@ -31,8 +31,8 @@ A full Spring Boot + Postgres stack defined entirely with Docker Compose — no 
 ## Exercise Pre-requisites
 
 - Install **Rancher Desktop (Recommended!)**
-  - Make sure `~/.rd/bin` is on your PATH!
-  - If already using Docker Desktop or Podman, follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup).
+  - If you already have a working Docker CLI (Podman, etc.), make sure to follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup).
+  - After installing Rancher Desktop, make sure `~/.rd/bin` is on your PATH!
 - Make sure `docker --version` works from your terminal.
 
 ## Docs
@@ -146,6 +146,8 @@ Containerising it pins everything
   - **Major/minor tag** (e.g. `eclipse-temurin:21-jre`, `nginx:stable`) — fine for workshops and dev; you still get security patches.
   - **Full version tag** (e.g. `alpine:3.19.0`) — recommended for production.
   - **Digest pin** (e.g. `alpine@sha256:...`) — fully reproducible builds; pair with a tool like Renovate/Dependabot to keep it updated.
+- Tag your own container images with a semver (e.g. `my-app:1.2.3`)!
+  - If you keep pushing onto `:latest`, you will lose all old versions (no rollback possible).
 - Add metadata to your container images!
     ```
     LABEL org.opencontainers.image.source="https://github.com/org/repo"
