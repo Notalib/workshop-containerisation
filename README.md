@@ -11,23 +11,6 @@ This repo contains example applications for containerization. Some are education
   - Highly suggest starting with [1-ubuntu-debugger](./1-ubuntu-debugger/Dockerfile) to grasp the basics.
 - `edu-<name>/` — Already-containerized educational examples. Read, run and learn from them.
 
-## Educational examples
-
-These are not exercises — they're ready-to-run examples to study and play with.
-They contain completed Dockerfiles ready to build and run.
-
-### [edu-micro-go-app](./edu-micro-go-app/)
-
-A `scratch`-based Go app that prints the contents of a `.txt` file. Inspect the Dockerfile to see how multi-stage + `FROM scratch` produces tiny images. Build it and check the image size with `docker images`.
-
-### [edu-distroless](./edu-distroless/)
-
-A distroless Go app with a walkthrough on how to debug containers that have no shell (using `cdebug`, `netshoot`, etc.).
-
-### [edu-spring-postgres](./edu-spring-postgres/)
-
-A full Spring Boot + Postgres stack defined entirely with Docker Compose — no local JDK or database needed. Demonstrates multi-service Compose, networking, and volume persistence.
-
 ## Exercise Pre-requisites
 
 - Install **Rancher Desktop**
@@ -157,6 +140,24 @@ Containerising it pins everything
     LABEL org.opencontainers.image.version="1.0.0"
     LABEL org.opencontainers.image.description="My awesome app image"
     ```
+
+## Educational examples
+
+These are not exercises — they're ready-to-run examples to study and play with. They contain completed Dockerfiles ready to build and run.
+
+There is a lot of valuable knowledge in these, **do not ignore them**.
+
+### [edu-micro-go-app](./edu-micro-go-app/)
+
+A `scratch`-based Go app that prints the contents of a `.txt` file. Inspect the Dockerfile to see how multi-stage + `FROM scratch` produces tiny images. Build it and check the image size with `docker images`.
+
+### [edu-distroless](./edu-distroless/)
+
+A distroless Go app with a walkthrough on how to debug containers that have no shell (using `cdebug`, `netshoot`, etc.).
+
+### [edu-spring-postgres](./edu-spring-postgres/)
+
+A full Spring Boot + Postgres stack defined entirely with Docker Compose — no local JDK or database needed. Demonstrates multi-service Compose, networking, and volume persistence.
 
 ## Bonus exercises
 
