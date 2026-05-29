@@ -13,7 +13,7 @@ This repo contains example applications for containerization. Some are education
 
 ## Prerequisites
 
-**Skip these if you already have a working Docker CLI!** (Docker Engine, Podman, etc.).
+**🤓  Skip these if you already have a working Docker CLI!** (Docker Engine, Podman, etc.).
 
 Just make sure to follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup). These are covered automatically by Rancher Desktop.
 
@@ -21,9 +21,11 @@ Just make sure to follow our network guidelines [here](https://kb-dk.atlassian.n
   - On Linux its suggested to use containerd as Container Engine (Preferences → Container Engine).
   - See [official guide](https://docs.rancherdesktop.io/getting-started/installation) if unsure how to install on your platform.
   - After installing Rancher Desktop, make sure `~/.rd/bin` is on your PATH!
-- Ensure you have a working `docker` command in your terminal. Test that `docker --version` and `docker ps` does not print any errors.
+- Ensure you have a working `docker` command in your terminal. Test that `docker --version` and `docker ps` exits cleanly.
 
 ### IDE support
+
+⚠️ Highly recommend you have basic IDE support setup for the exercises ⚠️
 
 #### VS Code extensions
 - Docker + Docker DX by Docker.io [link](https://marketplace.visualstudio.com/items?itemName=docker.docker)
