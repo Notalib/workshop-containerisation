@@ -25,9 +25,4 @@ RUN echo "echo Welcome user $(whoami)! The container is running!" >> ~/.bash_pro
 
 ENTRYPOINT ["/bin/bash", "--login"]
 
-# TODO: When the TODO has been completed try to build & run the container:
-#   BUILD: docker build . --progress=plain --no-cache --tag ubuntu-debugger
-#   RUN:   docker run --rm -it ubuntu-debugger
-#
-# NOTE: --progres=plain and --no-cache helps with build debugging, by making sure our RUN commands are executed & printed on every build.
-#       You can stop using those flags when everything works.
+# TODO: When the TODO has been completed try to build & run the container (see README for commands).
