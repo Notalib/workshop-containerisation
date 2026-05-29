@@ -30,10 +30,12 @@ A full Spring Boot + Postgres stack defined entirely with Docker Compose — no 
 
 ## Exercise Pre-requisites
 
-- Install **Rancher Desktop (Recommended!)**
-  - If you already have a working Docker CLI (Podman, etc.), make sure to follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup).
+- Install **Rancher Desktop**
+  - **Skip if you already have a working Docker CLI** (Podman, etc.). Just make sure to follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup). These are covered automatically by Rancher Desktop.
+  - On Linux its suggested to use containerd as Container Engine (Preferences → Container Engine).
+  - See [official guide](https://docs.rancherdesktop.io/getting-started/installation) if unsure how to install on your platform.
   - After installing Rancher Desktop, make sure `~/.rd/bin` is on your PATH!
-- Make sure `docker --version` works from your terminal.
+- Basically... Just make sure you have a working `docker` command in your terminal.
 
 ## Docs
 
