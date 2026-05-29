@@ -30,10 +30,12 @@ A full Spring Boot + Postgres stack defined entirely with Docker Compose — no 
 
 ## Exercise Pre-requisites
 
-- Install **Rancher Desktop (Recommended!)**
-  - Make sure `~/.rd/bin` is on your PATH!
-  - If already using Docker Desktop or Podman, follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup).
-- Make sure `docker --version` works from your terminal.
+- Install **Rancher Desktop**
+  - **Skip if you already have a working Docker CLI** (Podman, etc.). Just make sure to follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup). These are covered automatically by Rancher Desktop.
+  - On Linux its suggested to use containerd as Container Engine (Preferences → Container Engine).
+  - See [official guide](https://docs.rancherdesktop.io/getting-started/installation) if unsure how to install on your platform.
+  - After installing Rancher Desktop, make sure `~/.rd/bin` is on your PATH!
+- Basically... Just make sure you have a working `docker` command in your terminal.
 
 ## Docs
 
@@ -157,6 +159,9 @@ Containerising it pins everything
   - **Major/minor tag** (e.g. `eclipse-temurin:21-jre`, `nginx:stable`) — fine for workshops and dev; you still get security patches.
   - **Full version tag** (e.g. `alpine:3.19.0`) — recommended for production.
   - **Digest pin** (e.g. `alpine@sha256:...`) — fully reproducible builds; pair with a tool like Renovate/Dependabot to keep it updated.
+- Tag your own container images with a semver (e.g. `my-app:1.2.3`)!
+  - By default `image: my-app` will push onto `:latest` tag.
+  - If you keep pushing onto `:latest`, rollback becomes difficult.
 - Add metadata to your container images!
     ```
     LABEL org.opencontainers.image.source="https://github.com/org/repo"
