@@ -11,31 +11,27 @@ This repo contains example applications for containerization. Some are education
   - Highly suggest starting with [1-ubuntu-debugger](./1-ubuntu-debugger/Dockerfile) to grasp the basics.
 - `edu-<name>/` — Already-containerized educational examples. Read, run and learn from them.
 
-## Educational examples
+## Prerequisites
 
-These are not exercises — they're ready-to-run examples to study and play with.
-They contain completed Dockerfiles ready to build and run.
+**🤓  Skip these if you already have a working Docker CLI!** (Docker Engine, Podman, etc.).
 
-### [edu-micro-go-app](./edu-micro-go-app/)
-
-A `scratch`-based Go app that prints the contents of a `.txt` file. Inspect the Dockerfile to see how multi-stage + `FROM scratch` produces tiny images. Build it and check the image size with `docker images`.
-
-### [edu-distroless](./edu-distroless/)
-
-A distroless Go app with a walkthrough on how to debug containers that have no shell (using `cdebug`, `netshoot`, etc.).
-
-### [edu-spring-postgres](./edu-spring-postgres/)
-
-A full Spring Boot + Postgres stack defined entirely with Docker Compose — no local JDK or database needed. Demonstrates multi-service Compose, networking, and volume persistence.
-
-## Exercise Pre-requisites
+Just make sure to follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup). These are covered automatically by Rancher Desktop.
 
 - Install **Rancher Desktop**
-  - **Skip if you already have a working Docker CLI** (Podman, etc.). Just make sure to follow our network guidelines [here](https://kb-dk.atlassian.net/wiki/spaces/CT/pages/836009988/Docker+setup). These are covered automatically by Rancher Desktop.
   - On Linux its suggested to use containerd as Container Engine (Preferences → Container Engine).
   - See [official guide](https://docs.rancherdesktop.io/getting-started/installation) if unsure how to install on your platform.
   - After installing Rancher Desktop, make sure `~/.rd/bin` is on your PATH!
-- Basically... Just make sure you have a working `docker` command in your terminal.
+- Ensure you have a working `docker` command in your terminal. Test that `docker --version` and `docker ps` exits cleanly.
+
+### IDE support
+
+⚠️ Highly recommend you have basic IDE support setup for the exercises ⚠️
+
+#### VS Code extensions
+- Docker + Docker DX by Docker.io [link](https://marketplace.visualstudio.com/items?itemName=docker.docker)
+
+#### IntelliJ Idea plugins
+- docker by JetBrains [link](https://plugins.jetbrains.com/plugin/7724-docker)
 
 ## Docs
 
@@ -157,6 +153,24 @@ Containerising it pins everything
     LABEL org.opencontainers.image.version="1.0.0"
     LABEL org.opencontainers.image.description="My awesome app image"
     ```
+
+## Educational examples
+
+These are not exercises — they're ready-to-run examples to study and play with. They contain completed Dockerfiles ready to build and run.
+
+There is a lot of valuable knowledge in these, **do not ignore them**.
+
+### [edu-micro-go-app](./edu-micro-go-app/)
+
+A `scratch`-based Go app that prints the contents of a `.txt` file. Inspect the Dockerfile to see how multi-stage + `FROM scratch` produces tiny images. Build it and check the image size with `docker images`.
+
+### [edu-distroless](./edu-distroless/)
+
+A distroless Go app with a walkthrough on how to debug containers that have no shell (using `cdebug`, `netshoot`, etc.).
+
+### [edu-spring-postgres](./edu-spring-postgres/)
+
+A full Spring Boot + Postgres stack defined entirely with Docker Compose — no local JDK or database needed. Demonstrates multi-service Compose, networking, and volume persistence.
 
 ## Bonus exercises
 
