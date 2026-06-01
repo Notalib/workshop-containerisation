@@ -9,6 +9,7 @@
 
 ### Build
 
+Command to build the container from this folder:
 ```bash
 docker build . --progress=plain --no-cache --tag ubuntu-debugger
 ```
@@ -21,6 +22,7 @@ What do the flags mean?
 
 ### Run
 
+Command to run the built container image:
 ```bash
 docker run --rm -it ubuntu-debugger
 ```
