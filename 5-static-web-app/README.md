@@ -11,7 +11,7 @@ HINT: It's inside `/use/share/nginx`
 
 Command to build the container from this folder:
 ```bash
-docker build . --progress=plain --no-cache --tag dotnet-app
+docker build . --progress=plain --no-cache --tag static-web
 ```
 
 What do the flags mean?
@@ -22,7 +22,17 @@ What do the flags mean?
 
 ### Run
 
-Command to run the built container image
+Command to run the built container image and expose it on your host port 8888.
 ```bash
-docker run --rm -it dotnet-app
+docker run -d -p 8888:80 static-web
+```
+
+Now try opening `localhost:8888` in your browser.
+
+### Runtime volume mounting
+
+Alternatively we can just mount the `html` dir at runtime on the unmodified nginx image:
+
+```bash
+docker run --rm -p 8888:80 -v ./html:/usr/share/nginx/html --name static-web nginx
 ```
