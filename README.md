@@ -21,7 +21,7 @@ Just make sure to follow our network guidelines [here](https://kb-dk.atlassian.n
   - On Linux its suggested to use containerd as Container Engine (Preferences → Container Engine).
   - See [official guide](https://docs.rancherdesktop.io/getting-started/installation) if unsure how to install on your platform.
   - After installing Rancher Desktop, make sure `~/.rd/bin` is on your PATH!
-- Ensure you have a working `docker` command in your terminal. Test that `docker --version` and `docker ps` exits cleanly.
+- Ensure you have a working `docker` command in your terminal. Test that `docker info` and `docker ps` exits cleanly.
 
 ### IDE support
 
@@ -147,6 +147,7 @@ Containerising it pins everything
 - Tag your own container images with a semver (e.g. `my-app:1.2.3`)!
   - By default `image: my-app` will push onto `:latest` tag.
   - If you keep pushing onto `:latest`, rollback becomes difficult.
+- Do **not** run the container as root, runtime images should run as an unprivileged user!
 - Add metadata to your container images!
     ```
     LABEL org.opencontainers.image.source="https://github.com/org/repo"
