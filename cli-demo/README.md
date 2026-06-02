@@ -202,7 +202,7 @@ Remove networks:
 docker network rm wp-net spring-net
 ```
 
-Remove compose stack (and data volumes):
+Remove compose stack (and data volumes!):
 
 ```bash
 docker compose down --volumes
