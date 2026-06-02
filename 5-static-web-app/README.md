@@ -27,6 +27,8 @@ Command to run the built container image and expose it on your host port 8888.
 docker run -d -p 8888:80 static-web
 ```
 
+Now try opening `localhost:8888` in your browser.
+
 ### Runtime volume mounting
 
 Alternatively we can just mount the `html` dir at runtime on the unmodified nginx image:

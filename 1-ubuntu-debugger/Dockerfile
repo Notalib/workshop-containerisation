@@ -15,7 +15,7 @@ RUN apt-get update && \
 RUN cat /etc/os-release
 
 # Check if the commands are available now
-RUN command curl || command nslookup || echo "Network utils NOT found!"
+RUN command -v curl || command -v nslookup || echo "Network utils NOT found!"
 
 # We don't need to be root anymore,
 # switch to Ubuntu's builtin unpriviledged user.
