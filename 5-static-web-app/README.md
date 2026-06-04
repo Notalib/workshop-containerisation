@@ -3,7 +3,7 @@
 1. Open the existing `Dockerfile`
 2. Fill in the TODOs to copy in the [html](./html) folder to a place nginx will host when run
 
-HINT: It's inside `/use/share/nginx`
+HINT: It's inside `/usr/share/nginx`
 
 ## TIPS
 
