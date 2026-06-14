@@ -1,5 +1,7 @@
 # ---- Build stage ----
-FROM maven:3.9-eclipse-temurin-21 AS build
+# --platform=$BUILDPLATFORM: run Maven on the host arch (no QEMU). Bytecode is portable;
+# the per-arch JRE base in the runtime stage supplies the arch-specific launcher.
+FROM --platform=$BUILDPLATFORM maven:3.9-eclipse-temurin-21 AS build
 
 WORKDIR /app
 

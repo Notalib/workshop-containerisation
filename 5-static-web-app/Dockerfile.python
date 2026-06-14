@@ -8,5 +8,8 @@ COPY html/* /app
 
 EXPOSE 80
 
+LABEL org.opencontainers.image.source=https://github.com/notalib/workshop-containerisation
+LABEL org.opencontainers.image.description="Static web-app hosted by python"
+
 # Host our static website via Python's http.server.
 ENTRYPOINT ["python3", "-m", "http.server", "80"]

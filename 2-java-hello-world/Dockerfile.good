@@ -1,5 +1,7 @@
 # Build stage
-FROM eclipse-temurin:21-jdk AS build
+# --platform=$BUILDPLATFORM: compile on the host arch (no QEMU). Java bytecode is
+# architecture-independent; the per-arch JRE base in the runtime stage does the rest.
+FROM --platform=$BUILDPLATFORM eclipse-temurin:21-jdk AS build
 
 WORKDIR /src
 

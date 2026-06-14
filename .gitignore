@@ -8,3 +8,6 @@
 **/target
 .idea/
 **/**/project.iml
+
+# Others
+awesome-compose

@@ -4,7 +4,10 @@
 ## Build stage ##
 #################
 
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS builder
+# --platform=$BUILDPLATFORM: run the SDK natively on the host arch (no QEMU). The app is
+# framework-dependent (portable IL), so the build output is architecture-independent; the
+# correct per-arch runtime base is pulled in the runtime stage below.
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS builder
 
 WORKDIR /src
 
@@ -14,7 +17,9 @@ RUN dotnet restore hello-world.csproj
 
 COPY . /src
 
-RUN dotnet publish "hello-world.csproj" -c Release -o /built
+# UseAppHost=false: skip the native (arch-specific) launcher executable — we start via
+# `dotnet hello-world.dll`, so the output stays purely portable across architectures.
+RUN dotnet publish "hello-world.csproj" -c Release -o /built /p:UseAppHost=false
 
 ###################
 ## Runtime stage ##
