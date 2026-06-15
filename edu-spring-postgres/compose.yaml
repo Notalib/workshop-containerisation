@@ -11,6 +11,11 @@ services:
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - POSTGRES_PASSWORD=db-wrz2z
+      # DB is always available in compose, so override the K8s-safe defaults:
+      # create schema via Hibernate, then run schema.sql + data.sql for seed data.
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_SQL_INIT_MODE=always
+      - SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION=true
     depends_on:
       - db
 

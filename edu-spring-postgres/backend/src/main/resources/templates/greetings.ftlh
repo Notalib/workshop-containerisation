@@ -22,6 +22,11 @@
       </#list>
     </tbody>
   </table>
-  <p><a href="/new">Add a greeting</a></p>
+  <p>
+    <a href="/new">Add a greeting</a>
+    <form action="/seed" method="post" style="display:inline">
+      <button type="submit">Seed default data</button>
+    </form>
+  </p>
 </body>
 </html>

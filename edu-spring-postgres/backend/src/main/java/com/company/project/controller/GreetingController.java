@@ -2,6 +2,7 @@ package com.company.project.controller;
 
 import com.company.project.entity.Greeting;
 import com.company.project.service.IGreetingService;
+import java.util.List;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +77,17 @@ public class GreetingController {
     @GetMapping("/new")
     public String newGreetingForm() {
         return "new";
+    }
+
+    @PostMapping("/seed")
+    public String seedDatabase() {
+        log.info("POST /seed — seeding default greetings");
+        List.of("Docker container", "An awesome workshop", "The Future").forEach(name -> {
+            if (iGreetingService.showHome(name).isEmpty()) {
+                iGreetingService.createGreeting(name);
+            }
+        });
+        return "redirect:/greetings";
     }
 
     @PostMapping("/greetings")
