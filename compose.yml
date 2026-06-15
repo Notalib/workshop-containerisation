@@ -3,19 +3,19 @@ services:
     build: ./1-ubuntu-debugger # Folder containing the Dockerfile, also known as the build context
     image: ghcr.io/notalib/workshop-containerisation/ubuntu-debugger # The name of the image to be built, in the format <repository>/<image-name>:<tag>
 
-  java-app:
+  java-hello-world:
     build:
       context: ./2-java-hello-world
       dockerfile: Dockerfile.good
     image: ghcr.io/notalib/workshop-containerisation/java-hello-world
 
-  java-pom-app:
+  java-hello-world-pom:
     build:
       context: ./3-java-hello-world-pom
       dockerfile: Dockerfile.good
     image: ghcr.io/notalib/workshop-containerisation/java-hello-world-pom
 
-  dotnet-app:
+  dotnet-hello-world:
     build:
       context: ./4-dotnet-hello-world
       dockerfile: Dockerfile.good
@@ -48,4 +48,4 @@ services:
   edu-spring-boot:
     build:
       context: edu-spring-postgres/backend
-    image: ghcr.io/notalib/workshop-containerisation/spring-postgres
+    image: ghcr.io/notalib/workshop-containerisation/edu-spring-boot
